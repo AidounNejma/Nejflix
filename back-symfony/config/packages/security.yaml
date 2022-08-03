@@ -50,8 +50,8 @@ security:
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/users, roles: IS_AUTHENTICATED_FULLY, methods: [GET, PUT, DELETE, PATCH] }
-        - { path: ^/api/projects, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [GET, PUT, DELETE, PATCH] }
-
+        - { path: ^/api/projects, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [GET, PUT, PATCH] }
+        - { path: ^/api/projects, roles: IS_AUTHENTICATED_FULLY, methods: [GET, PUT, DELETE, PATCH] }
 when@test:
     security:
         password_hashers:
