@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import axios from 'axios';
 
 const client = axios.create({
-    baseURL: "http://127.0.0.1:8000/projects" 
+    baseURL: "https://127.0.0.1:8000/api/projects" 
 });
 
 const About = () => {
@@ -14,7 +14,7 @@ const About = () => {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-        client.get('').then((response) => {
+        client.get('?page=1').then((response) => {
             setProjects(response.data);
             console.log(response);
         });
