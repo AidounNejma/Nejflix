@@ -1,0 +1,47 @@
+$font_color: #989897;
+$border_radius: 5px;
+
+.footer {
+    position: absolute;
+/*     bottom: 0; */
+    height: 220px;
+    width: 100%;
+    flex-shrink: 0;
+    background: #141414;
+    padding: 20px 30px;
+    color: $font_color;
+    text-align: center;
+
+    .questions{
+        color: #fff;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+
+    .terms {
+        margin-top: 30px;
+
+        a {
+            font-size: 12px;
+            padding-right: 30px;
+
+            &:hover{
+                color: $font_color !important;
+                transition: 0.5s;
+            }
+        }
+    }
+
+    select {
+        margin-top: 30px;
+        height: 40px;
+        background: black;
+        border: 1px solid red;
+        color: $font_color;
+        outline: none;
+        border-radius: $border_radius;
+        padding: 10px 20px;
+    }
+}

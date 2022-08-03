@@ -1,0 +1,161 @@
+$primary: #db202c;
+$error: orangered;
+$font_color: #989897;
+$border_radius: 5px;
+
+%extend {
+    top: 8px;
+    bottom: 10px;
+    left: 20px;
+    font-size: 11px;
+    opacity: 1;
+}
+
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+
+
+.body {
+    margin: 0;
+    width: 100vw;
+    min-height: 920px;
+    position: relative;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        linear-gradient(to top, rgba(0, 0, 0, 0) 90%, rgba(0, 0, 0, 0.5)),
+        url(https://i.postimg.cc/NjHjKtG4/US-en-20190128-popsignuptwoweeks-perspective-alpha-website-large.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.login-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+}
+
+.login-header {
+    width: 100%;
+    padding: 20px 40px;
+
+    img{
+        width: 160px;
+    }
+}
+
+.login {
+    width: 425px;
+    height: 500px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: $border_radius;
+    margin-bottom: 15%;
+
+    a {
+        cursor: pointer;
+    
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    
+    .signin-form {
+        margin-top: 30px;
+        width: 70%;
+        position: relative;
+        height: 100%;
+
+        .title {
+            color: white;
+        }
+
+        .signin-btn {
+            margin-top: 30px;
+            width: 100%;
+            padding: 13px 0;
+            border-radius: $border_radius;
+            border: none;
+            background: $primary;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .action-group {
+            margin-top: 8px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            color: $font_color;
+            font-size: 13px;
+
+            input {
+                -ms-transform: scale(1.2);
+                -moz-transform: scale(1.2);
+                -webkit-transform: scale(1.2);
+                -o-transform: scale(1.2);
+                padding: 10px;
+            }
+            
+            a{
+                color: $font_color;
+            }
+        }
+    }
+}
+
+.field {
+    position: relative;
+}
+
+.field input {
+    background: #333333;
+    color: white;
+    font-size: 14px;
+    width: 100%;
+    height: 45px;
+    margin: 5px 0;
+    border: none;
+    border-radius: $border_radius;
+    padding: 15px 0 0 20px;
+    outline: none;
+
+    &:focus~.floating-label {
+        @extend %extend;
+    }
+
+    &:not(:focus):valid~.floating-label {
+        @extend %extend;
+    }
+
+    &.invalid {
+        border-bottom: 2px solid $error;
+    }
+}
+
+.floating-label {
+    position: absolute;
+    pointer-events: none;
+    left: 20px;
+    top: 18px;
+    transition: 0.2s ease all;
+    color: $font_color;
+}
+
+.error-message {
+    color: $error;
+    margin: 0;
+    font-size: 13px;
+    width: 100%;
+}

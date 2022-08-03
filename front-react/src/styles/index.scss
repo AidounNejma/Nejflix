@@ -1,0 +1,39 @@
+@import "./settings";
+
+$bg-color: #141414;
+$base-color: #e40913;
+$white : #fff;
+$semi-white: #e5e5e5;
+$grey: #808080;
+
+@font-face {
+    font-family: 'Netflix-Regular';
+    src: local('Netflix-Regular'), url('../fonts/netflix-sans-font/NetflixSans-Regular.otf');
+}
+
+@font-face {
+    font-family: 'Netflix-Medium';
+    src: local('Netflix-Medium'), url('../fonts/netflix-sans-font/NetflixSans-Medium.otf');
+}
+
+@font-face {
+    font-family: 'Netflix-Light';
+    src: local('Netflix-Light'), url('../fonts/netflix-sans-font/NetflixSans-Light.otf');
+}
+
+@font-face {
+    font-family: 'Netflix-Bold';
+    src: local('Netflix-Bold'), url('../fonts/netflix-sans-font/NetflixSans-Bold.otf');
+}
+
+*{
+    font-family: Netflix-Regular, sans-serif;
+}
+
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
