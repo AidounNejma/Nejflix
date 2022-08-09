@@ -1,32 +1,86 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
+import useAuth from '../hooks/useAuth';
+import axios from '../interceptors/axios';
+import jwtDecode from "jwt-decode";
+import {useNavigate} from 'react-router-dom';
+
 import Footer from '../components/Footer';
 import '../styles/pages/_login.scss';
-import Logo from '../img/logo-long.png'
-import axios from 'axios';
-import {Navigate} from 'react-router-dom';
+import Logo from '../img/logo-long.png';
+
+
+const LOGIN_URL = "/login_check";
 
 const LogIn = () => {
+    const { setAuth } = useAuth();
+
+    /* Redirection de l'utilisateur */
+    const navigate = useNavigate();
+
+    const from =  "/tableau-de-bord";
+    
+    const userRef = useRef();
+    const errRef = useRef();
 
     const [email, setEmail]= useState("");
     const [password, setPassword] = useState("");
-    const [navigate, setNavigate] = useState(false);
+    
+    const [errMsg, setErrMsg] = useState('');
 
-    const submit = async e => {
+    useEffect(() => {
+        userRef.current.focus();  
+    }, []);
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [email, password]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await axios.post('login_check', {
-            'username': email, password
-        }, {withCredentials: true, headers: { "Content-Type": "application/json" }});
 
-        axios.defaults.headers.common['Authorization'] = `nejflix ${response['token']}`;
-        console.log(response);
-        setNavigate(true);
-    }
+        try{
+            const response = await axios.post(LOGIN_URL, 
+                JSON.stringify(
+                    { username: email, password }
+                ),
+                {
+                    headers: {'Content-Type': 'application/json'},
+                    withCredentials: true
+                }
+            );
+            
+            const accessToken = response?.data?.token;
+            const parsedData = jwtDecode(response?.data?.token);
+            const roles = parsedData.roles;
+            const identifier = parsedData.username;
 
-    if (navigate){
-        return <Navigate to="/a-propos"/>
+            setAuth({identifier, password, roles, accessToken});
+            
+            axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
+
+            setEmail('');
+            setPassword('');
+            
+            /* Si la connexion est réussie, j'envoie l'utilisateur sur le tableau de bord */
+            navigate(from, { replace: true });
+
+        } catch(err){
+
+            if(!err?.response){
+                setErrMsg('Pas de réponse du serveur')
+            }else if(err.response?.status === 400){
+                setErrMsg('Il manque le mail ou le mot de passe');
+            }else if(err.response?.status === 401){
+                setErrMsg('Accès non autorisé');
+            } else{
+                setErrMsg('Echec de la connexion');
+            }
+            errRef.current.focus();
+        }
+        
     }
     return (
-        <div className='body'>
+        <section className='body'>
             <div className="login-wrapper">
                 <div className="login-header">
                     <a href="/">
@@ -35,20 +89,38 @@ const LogIn = () => {
                 </div>
 
                 <div className="login">
-            <form className="signin-form" onSubmit={submit}>
+            <form className="signin-form" onSubmit={handleSubmit}>
                 <h1 className="title">Connexion</h1>
 
+                <small ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</small>
+
                 <div className="field">
-                    <input type="text" className="text-input" name='email' required  onChange={e=>setEmail(e.target.value)}/>
-                    <span className="floating-label">Adresse email</span>
+                    <input 
+                        type="text" 
+                        className="text-input" 
+                        name='email' 
+                        ref={userRef}
+                        autoComplete="off"
+                        onChange={e=>setEmail(e.target.value)}
+                        value={email}
+                        required 
+                    />
+                    <span className="floating-label" htmlFor="email">Adresse email</span>
                 </div>
 
                 <div className="field">
-                    <input type="password" className="text-input" name='password' required onChange={e=>setPassword(e.target.value)} />
-                    <span className="floating-label test">Mot de passe</span>
+                    <input 
+                        type="password" 
+                        className="text-input" 
+                        name='password' 
+                        onChange={e=>setPassword(e.target.value)}
+                        value={password} 
+                        required
+                    />
+                    <span className="floating-label test" htmlFor="password">Mot de passe</span>
                 </div>
 
-                <button className="signin-btn">S'inscrire</button>
+                <button className="signin-btn">Se connecter</button>
 
                 <div className="action-group">
                     <label htmlFor="remember-me">
@@ -65,9 +137,8 @@ const LogIn = () => {
             </div>
 
             <Footer/>
-        </div>
+        </section>
 
-        
     );
 };
 
