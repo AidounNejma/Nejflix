@@ -1,18 +1,18 @@
 import React, {useState, useRef, useEffect} from 'react';
 import useAuth from '../hooks/useAuth';
-import axios from '../interceptors/axios';
-import jwtDecode from "jwt-decode";
 import {useNavigate} from 'react-router-dom';
+import axios from '../interceptors/axios';
+import jwtDecode from 'jwt-decode';
 
 import Footer from '../components/Footer';
-import '../styles/pages/_login.scss';
-import Logo from '../img/logo-long.png';
-
-
-const LOGIN_URL = "/login_check";
+import '../assets/styles/pages/_login.scss';
+import Logo from '../assets/img/logo-long.png';
+import AuthApi from '../services/AuthApi';
 
 const LogIn = () => {
+
     const { setAuth } = useAuth();
+    const LOGIN_URL = "login_check";
 
     /* Redirection de l'utilisateur */
     const navigate = useNavigate();
@@ -49,14 +49,15 @@ const LogIn = () => {
                 }
             );
             
-            const accessToken = response?.data?.token;
+            const authToken = response?.data?.token;
             const parsedData = jwtDecode(response?.data?.token);
             const roles = parsedData.roles;
             const identifier = parsedData.username;
 
-            setAuth({identifier, password, roles, accessToken});
+            setAuth({identifier, password, roles, authToken});
             
-            axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
+            axios.defaults.headers['Authorization'] = `Bearer ${authToken}`;
+            window.localStorage.setItem("authToken", authToken);
 
             setEmail('');
             setPassword('');

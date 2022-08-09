@@ -4,7 +4,7 @@ import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import '../styles/components/_netslider.scss';
+import '../assets/styles/components/_netslider.scss';
 
 import axios from 'axios';
 

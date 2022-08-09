@@ -1,5 +1,5 @@
 import Navigation from '../components/Navigation';
-import MainHeader from '../components/mainHeader';
+import MainHeader from '../components/MainHeader';
 import NetSlider from '../components/Netslider';
 import Footer from '../components/Footer';
 

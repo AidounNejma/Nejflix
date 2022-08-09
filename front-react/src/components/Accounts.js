@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/components/_accounts.scss';
+import '../assets/styles/components/_accounts.scss';
 import { NavLink } from "react-router-dom";
 
 const Accounts = () => {

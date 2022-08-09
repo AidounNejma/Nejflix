@@ -18,6 +18,7 @@ const App = () => {
                 <Route path="a-propos" element={<About />} />
                 <Route path="connexion" element={<LogIn />} />
                 
+
                 {/* Routes privées */}
                 <Route element={ <RequireAuth/> }>
                     <Route path="tableau-de-bord" element={<Profile/>}/>

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/components/_animation.scss';
+import '../assets/styles/components/_animation.scss';
 
 
 const IntroAnimation = () => {

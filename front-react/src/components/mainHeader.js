@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/components/_mainHeader.scss';
+import '../assets/styles/components/_mainHeader.scss';
 
 const mainHeader = () => {
     return (
