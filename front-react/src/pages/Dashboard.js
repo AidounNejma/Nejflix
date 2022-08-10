@@ -8,7 +8,6 @@ import Cards from '../components/Cards';
 
 import '../assets/styles/pages/_dashboard.scss';
 
-/* import '../assets/styles/pages/_dashboard.scss'; */
 const Dashboard = () => {
     const [name, setName] = useState('');
 
