@@ -1,82 +1,49 @@
-import React, {useState, useRef, useEffect} from 'react';
-import useAuth from '../hooks/useAuth';
+import React, {useState, useContext} from 'react';
 import {useNavigate} from 'react-router-dom';
-import axios from '../interceptors/axios';
-import jwtDecode from 'jwt-decode';
+import AuthApi from "../services/AuthApi";
+import AuthContext from '../contexts/AuthContext';
 
 import Footer from '../components/Footer';
 import '../assets/styles/pages/_login.scss';
 import Logo from '../assets/img/logo-long.png';
-import AuthApi from '../services/AuthApi';
 
 const LogIn = () => {
 
-    const { setAuth } = useAuth();
-    const LOGIN_URL = "login_check";
+    const {setIsAuthenticated} = useContext(AuthContext);
 
     /* Redirection de l'utilisateur */
     const navigate = useNavigate();
+    const to =  "/tableau-de-bord";
 
-    const from =  "/tableau-de-bord";
-    
-    const userRef = useRef();
-    const errRef = useRef();
+    const [credentials, setCredentials] = useState({
+        username: "",
+        password: ""
+    });
 
-    const [email, setEmail]= useState("");
-    const [password, setPassword] = useState("");
-    
-    const [errMsg, setErrMsg] = useState('');
+    const [error, setError] = useState("");
 
-    useEffect(() => {
-        userRef.current.focus();  
-    }, []);
+    // gestion des champs
+    const handleChange = ({currentTarget}) => {
+        const {value, name} = currentTarget;
 
-    useEffect(() => {
-        setErrMsg('');
-    }, [email, password]);
+        setCredentials({
+            ...credentials,
+            [name]: value
+        });
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try{
-            const response = await axios.post(LOGIN_URL, 
-                JSON.stringify(
-                    { username: email, password }
-                ),
-                {
-                    headers: {'Content-Type': 'application/json'},
-                    withCredentials: true
-                }
-            );
-            
-            const authToken = response?.data?.token;
-            const parsedData = jwtDecode(response?.data?.token);
-            const roles = parsedData.roles;
-            const identifier = parsedData.username;
+        try {
+            await AuthApi.authenticate(credentials);
+            setError("");
+            setIsAuthenticated(true);
+            navigate(to, { replace: true });
 
-            setAuth({identifier, password, roles, authToken});
-            
-            axios.defaults.headers['Authorization'] = `Bearer ${authToken}`;
-            window.localStorage.setItem("authToken", authToken);
-
-            setEmail('');
-            setPassword('');
-            
-            /* Si la connexion est réussie, j'envoie l'utilisateur sur le tableau de bord */
-            navigate(from, { replace: true });
-
-        } catch(err){
-
-            if(!err?.response){
-                setErrMsg('Pas de réponse du serveur')
-            }else if(err.response?.status === 400){
-                setErrMsg('Il manque le mail ou le mot de passe');
-            }else if(err.response?.status === 401){
-                setErrMsg('Accès non autorisé');
-            } else{
-                setErrMsg('Echec de la connexion');
-            }
-            errRef.current.focus();
+        } catch (error) {
+            console.log(error);
+            setError("Les informations de connexions ne sont pas valides");
         }
         
     }
@@ -93,20 +60,18 @@ const LogIn = () => {
             <form className="signin-form" onSubmit={handleSubmit}>
                 <h1 className="title">Connexion</h1>
 
-                <small ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</small>
-
                 <div className="field">
                     <input 
                         type="text" 
                         className="text-input" 
-                        name='email' 
-                        ref={userRef}
+                        name='username' 
+                        error={error}
                         autoComplete="off"
-                        onChange={e=>setEmail(e.target.value)}
-                        value={email}
+                        onChange={handleChange}
+                        value={credentials.username}
                         required 
                     />
-                    <span className="floating-label" htmlFor="email">Adresse email</span>
+                    <span className="floating-label" htmlFor="username">Adresse email</span>
                 </div>
 
                 <div className="field">
@@ -114,8 +79,8 @@ const LogIn = () => {
                         type="password" 
                         className="text-input" 
                         name='password' 
-                        onChange={e=>setPassword(e.target.value)}
-                        value={password} 
+                        onChange={handleChange}
+                        value={credentials.password} 
                         required
                     />
                     <span className="floating-label test" htmlFor="password">Mot de passe</span>

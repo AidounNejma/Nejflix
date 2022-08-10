@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import '../assets/styles/components/_navigation.scss'
+import React, { useState, useEffect, useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import AuthApi from '../services/AuthApi';
+import AuthContext from '../contexts/AuthContext';
+import '../assets/styles/components/_navigation.scss';
 
-const Navigation = () => {
+const Nav = () => {
     
+    /* Gestion de la navbar au scroll */
     const [navColor, setnavColor] = useState("transparent");
+    
     const listenScrollEvent = () => {
         window.scrollY > 10 ? setnavColor("#141414") : setnavColor("transparent");
     };
@@ -14,6 +18,20 @@ const Navigation = () => {
                 window.removeEventListener("scroll", listenScrollEvent);
             };
     }, []);
+
+    /* Gestion des liens selon l'authentification */
+    const { isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
+    
+    /* Redirection de l'utilisateur */
+    const navigate = useNavigate();
+    const to =  "/";
+
+    const handleLogout = () => {
+        AuthApi.logout();
+        setIsAuthenticated(false);
+        navigate(to, { replace: true });
+    }
+
     
     return (
         <div className="pinning-header">
@@ -26,6 +44,8 @@ const Navigation = () => {
                     <NavLink to="/" className="logo icon-logoUpdate active">
                     </NavLink>
                     <ul className="tabbed-primary-navigation">
+                    
+                        <>
                         <li className="navigation-tab">
                             <NavLink to="/">
                                 Accueil
@@ -36,6 +56,18 @@ const Navigation = () => {
                                 À propos
                             </NavLink>
                         </li>
+                        </>
+                    {
+                        isAuthenticated &&
+                        <>
+                        <li className="navigation-tab">
+                            <NavLink to="/tableau-de-bord">
+                                Tableau de bord
+                            </NavLink>
+                        </li>
+                        </>
+                    }
+                        
                     </ul>
                     
                     <div className="secondary-navigation">
@@ -69,12 +101,12 @@ const Navigation = () => {
                         <div className="nav-element">
                             <div className="account-menu-item">
                                 <div className="account-dropdown-button">
-                                    <a href="/YourAccount" role="button" tabIndex="0" aria-haspopup="true" aria-expanded="false" aria-label="Invité - Compte et paramètres">
+                                    <a href="/tableau-de-bord" role="button" tabIndex="0" aria-haspopup="true" aria-expanded="false" aria-label="Invité - Compte et paramètres">
                                         <span className="profile-link" role="presentation">
                                             <img className="profile-icon" src="https://occ-0-56-55.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABd2iBy1NSegYCzAbUxV12X2MEotOcn3FnxvaalWe08Wleic_GCdzveB-hLJq4mCnqGOu1zeBLD59D7X5sMZ2lyli0HfoyrY.png?r=558" alt=""/>
                                         </span>
                                     </a>
-                                    <span className="caret" role="presentation">
+                                    <span className="caret" role="presentation" onClick={handleLogout}>
                                     </span>
                                 </div>
                             </div>
@@ -89,4 +121,5 @@ const Navigation = () => {
     );
 };
 
-export default Navigation;
+export default Nav;
+

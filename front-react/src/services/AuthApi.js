@@ -8,18 +8,31 @@ function logout() {
 
 function login(token) {
     // on stocke le token dans le local storage
-    localStorage.setItem("authToken", token);
-    // on prévient axios qu'on a maintenant un header par défaut sur les futures requêtes http
-    axios.defaults.headers['Authorization'] = "Bearer " + token;
+    window.localStorage.setItem("authToken", token);
+    // on préviens axios qu'on a maintenant un header par défaut sur les futures requêtes http
+    axios.defaults.headers["Authorization"] = "Bearer " + token;
+}
+
+function authenticate(credentials) {
+    return axios
+        .post('login_check', credentials)
+        .then(response => {
+            console.log(response);
+            return response.data.token;
+        })
+        .then(token => {
+            login(token);
+            return true;
+        })
+    ;
 }
 
 function setup() {
-    const token = localStorage.getItem("authToken");
+    const token = window.localStorage.getItem("authToken");
 
     if(token) {
         const jwtData = jwtDecode(token);
         if(jwtData.exp * 1000 > new Date().getTime()) {
-
             login(token);
             return true;
         }
@@ -29,7 +42,7 @@ function setup() {
 }
 
 export default {
+    authenticate,
     logout,
-    setup,
-    login
+    setup
 };

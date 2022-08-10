@@ -1,31 +1,39 @@
-import React from "react";
+import React, { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import AuthApi from './services/AuthApi';
 import About from "./pages/About";
 import Home from "./pages/Home";
 import LogIn from "./pages/LogIn";
 import Profile from "./pages/Profile";
-import Layout from './components/Layout';
+import AuthContext from './contexts/AuthContext';
+import PrivateRoute from './components/PrivateRoute';
 
-import RequireAuth from "./components/RequireAuth.js";
-import {Routes, Route} from 'react-router-dom';
 
 const App = () => {
+    const [isAuthenticated, setIsAuthenticated] = useState(AuthApi.setup());
+
     return (
-        <Routes>
-            <Route path="/" element={ <Layout/> }> 
-                
-                {/* Routes publiques  */}
-                <Route path="/" element={ <Home/> }/> 
-                <Route path="a-propos" element={<About />} />
-                <Route path="connexion" element={<LogIn />} />
-                
 
-                {/* Routes privées */}
-                <Route element={ <RequireAuth/> }>
-                    <Route path="tableau-de-bord" element={<Profile/>}/>
-                </Route>
-
-            </Route>
-        </Routes>
+        <AuthContext.Provider value={{
+            isAuthenticated,
+            setIsAuthenticated
+        }}>
+                <main className="container mt-5">
+                    <Routes>
+                        <Route path="/" element={ <Home/> }/> 
+                        <Route path="a-propos" element={<About />} />
+                        <Route path="connexion" element={<LogIn />} />
+                        <Route 
+                            path="tableau-de-bord/*" 
+                            element={
+                                <PrivateRoute>
+                                    <Profile/>
+                                </PrivateRoute>
+                            }
+                        />
+                    </Routes>
+                </main>
+        </AuthContext.Provider>
     );
 };
 
