@@ -149,6 +149,10 @@
                     cursor: pointer;
                     display: flex;
                     width: 100%;
+
+                    .profile-icon{
+                        width: 30px;
+                    }
                 }
 
                 .caret {

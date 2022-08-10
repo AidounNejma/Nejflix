@@ -4,9 +4,9 @@ import AuthApi from './services/AuthApi';
 import About from "./pages/About";
 import Home from "./pages/Home";
 import LogIn from "./pages/LogIn";
-import Profile from "./pages/Profile";
 import AuthContext from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
+import Dashboard from './pages/Dashboard';
 
 
 const App = () => {
@@ -27,7 +27,7 @@ const App = () => {
                             path="tableau-de-bord/*" 
                             element={
                                 <PrivateRoute>
-                                    <Profile/>
+                                    <Dashboard/>
                                 </PrivateRoute>
                             }
                         />
