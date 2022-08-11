@@ -40,6 +40,9 @@ class Projects
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $framework = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateOfCreation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -137,6 +140,18 @@ class Projects
     public function setFramework(?string $framework): self
     {
         $this->framework = $framework;
+
+        return $this;
+    }
+
+    public function getDateOfCreation(): ?\DateTimeInterface
+    {
+        return $this->dateOfCreation;
+    }
+
+    public function setDateOfCreation(?\DateTimeInterface $dateOfCreation): self
+    {
+        $this->dateOfCreation = $dateOfCreation;
 
         return $this;
     }

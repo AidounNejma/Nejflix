@@ -8,8 +8,12 @@ import '../assets/styles/components/_netslider.scss';
 
 
 
-const Netslider = ({projects, openModal}) => {
+const Netslider = ({projects, openModal, setProject}) => {
     
+    const handleOpen = (id) => {
+        setProject(projects.find(x => x.id === id));
+        openModal(true)
+    };
 
     return (
         <div className="netslider-wrapper">
@@ -22,7 +26,11 @@ const Netslider = ({projects, openModal}) => {
                 className='section'
             >
                 {projects.map(project=> (
-                    <SwiperSlide className='item' key={project.id} onClick={()=> openModal(true)} >
+                    <SwiperSlide 
+                        className='item' 
+                        key={project.id} 
+                        onClick={()=> handleOpen(project.id)}
+                    >
                         <button>
                             <img
                             src="https://occ-0-1567-1123.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRvngexxF8H1-OzRWFSj6ddD-aB93tTBP9kMNz3cIVfuIfLEP1E_0saiNAwOtrM6xSOXvoiSCMsihWSkW0dq808-R7_lBnr6WHbjkKBX6I3sD0uCcS8kSPbRjEDdG8CeeVXEAEV6spQ.webp"

@@ -117,7 +117,7 @@ const Nav = () => {
                                 { 
                                     !isAuthenticated &&
                                     <>
-                                    <a href="/" role="button" tabIndex="0" aria-haspopup="true" aria-expanded="false" aria-label="Invité - Compte et paramètres">
+                                    <a href="/connexion" role="button" tabIndex="0" aria-haspopup="true" aria-expanded="false" aria-label="Invité - Compte et paramètres">
                                         <span className="profile-link" role="presentation">
                                             <img className="profile-icon" src={InviteLogo} alt=""/>
                                         </span>

@@ -11,7 +11,7 @@ const About = () => {
 
     const [show, setShow] = useState(false);
     const [projects, setProjects] = useState([]);
-
+    const [project, setProject] = useState([]);
 
     useEffect(()=>{
         (async () => {
@@ -22,12 +22,14 @@ const About = () => {
         })();
     }, []);
 
+    
+
     return (
         <div>
             <Navigation />
             <MainHeader />
-            <NetSlider projects={projects} openModal={setShow} />
-            <NejflixModal opened={show} setIsOpened={setShow}/>
+            <NetSlider projects={projects} openModal={setShow} setProject={setProject}/>
+            <NejflixModal opened={show} setIsOpened={setShow} setProject={project} />
             <Footer />
         </div>
     );

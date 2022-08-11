@@ -21,7 +21,7 @@ const Cards = () => {
     return (
         <div className="containerCards">
             
-            <a href="/" className="panelCards active" >
+            <a href="/tous-les-projets" className="panelCards active" >
                 <h3>Mes projets</h3>
             </a>
 

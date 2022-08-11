@@ -28,8 +28,10 @@ $duration: 250ms;
             .heading {
                 position: absolute;
                 bottom: 20px;
-                left: 20px;
+                left: 0;
+                right: 0;
                 color: #fff;
+                font-size: 1.4rem;
             }
 
             .duration {

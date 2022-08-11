@@ -7,6 +7,7 @@ import LogIn from "./pages/LogIn";
 import AuthContext from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import Dashboard from './pages/Dashboard';
+import Projects from './pages/Projects';
 
 
 const App = () => {
@@ -28,6 +29,14 @@ const App = () => {
                             element={
                                 <PrivateRoute>
                                     <Dashboard/>
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route 
+                            path="tous-les-projets/*" 
+                            element={
+                                <PrivateRoute>
+                                    <Projects/>
                                 </PrivateRoute>
                             }
                         />
