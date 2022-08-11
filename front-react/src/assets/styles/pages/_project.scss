@@ -1,0 +1,41 @@
+.formEditionProject{
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 900px;
+    margin: auto;
+    padding: 6%;
+    border-radius: 8px;
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 4% 0;
+
+        textarea{
+            resize: none;
+        }
+    }
+
+    .form-control{
+        background: none;
+        border: none;
+        border-bottom: 1px solid #434a52;
+        border-radius: 0;
+        box-shadow: none;
+        outline: none;
+        color: white;
+        width: 70%;
+        margin: auto;
+    }
+
+    .labelForm{
+        display: none;
+        
+    }
+}
+

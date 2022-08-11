@@ -112,6 +112,8 @@ const Nav = () => {
                                     </a>
                                     <span className="caret" role="presentation" onClick={handleLogout}>
                                     </span>
+                                    
+                                    
                                     </>
                                 }
                                 { 
@@ -123,6 +125,8 @@ const Nav = () => {
                                         </span>
                                     </a>
                                     </>
+
+                                    
                                 }
                                 </div>
                             </div>
