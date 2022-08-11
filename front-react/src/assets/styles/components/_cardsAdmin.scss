@@ -49,8 +49,16 @@ h1 {
             display: inline-block;
         }
 
-        a {
+        button, a {
             color: $white;
+            background: none;
+            color: inherit;
+            border: none;
+            padding: 0;
+            font: inherit;
+            cursor: pointer;
+            outline: inherit;
+
             svg{
                 width: 1rem;
             }
@@ -225,7 +233,7 @@ h1 {
             position: relative;
         }
 
-        a {
+        button, a {
             position: absolute;
             top: 50%;
             left: 50%;

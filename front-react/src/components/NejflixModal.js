@@ -11,8 +11,13 @@ const NejflixModal = ({opened, setIsOpened, setProject}) => {
     
     const handleToggleMute = () => {
         setMuted(current => !current);
-        setIconMuted(volume0 ? volume100 : '');
-    
+
+        if(muted === true){
+            setIconMuted(volume100);  
+        }else{
+            setIconMuted(volume0);
+        }
+        
     }
 
     return (
