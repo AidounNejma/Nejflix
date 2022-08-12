@@ -82,12 +82,14 @@ const Project = () => {
     //Gestion des fichiers
     const handleThumbnail = async ({currentTarget}) => {
         setSelectedFile(selectedFile, currentTarget.files[0]);
-        setIsFilePicked(true);
+        setIsFilePicked(isFilePicked, true);
         
         const formData = new FormData();
-
+        
+        //On met le fichier dans la variable formData
 		formData.append('file', currentTarget.files[0]);
         
+        // Requête à l'API pour envoyer le fichier
         await axios.post('media_objects', formData,  {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -95,11 +97,14 @@ const Project = () => {
         })
         .then(response => {
 
-            setProject({ ...project, 'thumbnail' : response.data.contentUrl });
+            console.log(response);
+            //On insère l'url dans le champ thumbnail de l'entité projects
+            setProject({ ...project, 'thumbnail' : response.data['@id'] });
 
             return response;
         });
     }
+
 
     // Gestion de la soumission du formulaire
     const handleSubmit = async event => {

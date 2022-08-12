@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../assets/styles/components/_cardsAdmin.scss';
 import Swal from 'sweetalert2';
 import axios from '../interceptors/axios';
@@ -7,7 +7,18 @@ import { Link } from 'react-router-dom';
 
 const CardsAdmin = ({projects}) => {
 
+    const [thumbnail, setThumbnail] = useState({});
 
+  /*   const getThumbnail = (id) => {
+        axios.get('projects/'+ id).then(async response => {
+            const r = response.data;
+
+            console.log(r);
+
+            return r;
+        });
+    }
+ */
     const monthNames = {
         1: "Jan", 
         2: "Fev", 
@@ -77,7 +88,7 @@ const CardsAdmin = ({projects}) => {
         <div className="row">
             {projects.map(project=> (
                 <div className="example-1 cardAdmin">
-                    <div className="wrapper">
+                    <div className="wrapper" style={{backgroundImage: `url(http://127.0.0.1:8000${project.thumbnail})`}}>
                         <div className="date">
                             <span className="day">{new Date(project.dateOfCreation).getDay()}</span>
                             <span className="month">{monthNames[new Date(project.dateOfCreation).getMonth()]}</span>
