@@ -38,11 +38,10 @@ class Projects
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateOfCreation = null;
 
-    #[ORM\ManyToOne(inversedBy: 'thumbnailProjects')]
+    #[ORM\ManyToOne(inversedBy: MediaObject::class)]
     #[ORM\JoinColumn(nullable: true)]
     #[ApiProperty(iri: 'https://schema.org/thumbnail')]
     private ?MediaObject $thumbnail = null;
-
 
     public function getId(): ?int
     {

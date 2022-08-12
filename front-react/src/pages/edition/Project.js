@@ -12,7 +12,7 @@ import Textarea from '../../components/forms/Textarea';
 import Datetime from '../../components/forms/Datetimes';
 
 import ProjectApi from '../../services/ProjectApi';
-import ImageApi from '../../services/ImageApi';
+import axios from '../../interceptors/axios';
 
 
 const Project = () => {
@@ -80,9 +80,25 @@ const Project = () => {
     }
 
     //Gestion des fichiers
-    const handleThumbnail = ({currentTarget}) => {
-        setSelectedFile(currentTarget.files[0]);
+    const handleThumbnail = async ({currentTarget}) => {
+        setSelectedFile(selectedFile, currentTarget.files[0]);
         setIsFilePicked(true);
+        
+        const formData = new FormData();
+
+		formData.append('file', currentTarget.files[0]);
+        
+        await axios.post('media_objects', formData,  {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then(response => {
+
+            setProject({ ...project, 'thumbnail' : response.data.contentUrl });
+
+            return response;
+        });
     }
 
     // Gestion de la soumission du formulaire
@@ -93,7 +109,6 @@ const Project = () => {
             setErrors({});
 
             if (editing) {
-                //await ImageApi.create(id, thumbnail);
                 await ProjectApi.update(id, project);
                 toast.success("Le client a bien été modifié");
             }else {
@@ -178,7 +193,6 @@ const Project = () => {
                 <File
                     name="thumbnail"
                     label="Vignette"
-                    value=''
                     className="formProject-Thumbnail"
                     onChange={handleThumbnail}
                     error=''

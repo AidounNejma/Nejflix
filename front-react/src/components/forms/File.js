@@ -3,7 +3,6 @@ import React from "react";
 const File = ({
     name,
     label,
-    value,
     onChange,
     type = "file",
     error = "",
@@ -12,7 +11,6 @@ const File = ({
     <div className="form-group">
         <label className="labelForm" htmlFor={name}>{label}</label>
         <input
-            value={value}
             onChange={onChange}
             type={type}
             name={name}
