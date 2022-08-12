@@ -14,10 +14,13 @@ const Projects = () => {
             await axios.get('projects').then((response)=>{
                 
                 setProjects(response.data['hydra:member']);
+
             });
             
         })();
     }, []);
+
+    
 
     return (
         <div>
