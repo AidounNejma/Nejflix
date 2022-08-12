@@ -19,6 +19,34 @@
         textarea{
             resize: none;
         }
+
+        .submitEditProject{
+            padding: 2%;
+            width: 40%;
+            margin: auto;
+            color: white;
+            background-color: red;
+            border: none;
+            font-size: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            
+            &:hover{
+                background-color: rgb(191, 8, 8);
+                transition: 0.5s;
+            }
+
+        }
+
+        .btnReturnToProjects{
+            margin: 2% auto;
+            color: white;
+
+            &:hover{
+                color: rgb(227, 225, 225);
+                transition: 0.5s;
+            }
+        }
     }
 
     .form-control{
@@ -36,6 +64,14 @@
     .labelForm{
         display: none;
         
+    }
+
+    .rdt{
+        text-align: center;
+    }
+    
+    .rdtPicker{
+        color: #000;
     }
 }
 

@@ -17,7 +17,7 @@ function authenticate(credentials) {
     return axios
         .post('login_check', credentials)
         .then(response => {
-            console.log(response);
+           /*  console.log(response); */
             return response.data.token;
         })
         .then(token => {

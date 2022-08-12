@@ -5,13 +5,14 @@ import File from '../../components/forms/File';
 import Textarea from '../../components/forms/Textarea';
 import Navigation from '../../components/Navigation';
 import { toast } from "react-toastify";
-import Dropzone from "dropzone";
 import '../../assets/styles/pages/_project.scss';
 import ProjectApi from '../../services/ProjectApi';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import Dropzone from "dropzone";
+import Datetime from '../../components/forms/Datetimes';
 
 
-const Project = ({match}) => {
+const Project = () => {
     
     const id  = useParams().projectId;
     
@@ -20,7 +21,8 @@ const Project = ({match}) => {
         description: "",
         language: "",
         company: "",
-        framework: ""
+        framework: "",
+        dateOfCreation:""
     });
 
     const [errors, setErrors] = useState({
@@ -28,7 +30,8 @@ const Project = ({match}) => {
         description: "",
         language: "",
         company: "",
-        framework: ""
+        framework: "",
+        dateOfCreation:""
     });
 
     const [editing, setEditing] = useState(false);
@@ -36,10 +39,10 @@ const Project = ({match}) => {
     // Récupération du projet en fonction de l'identifiant
     const fetchProject = async id => {
         try {
-            const { name, description, language, company, framework } = await ProjectApi.find(
+            const { name, description, language, company, framework, dateOfCreation } = await ProjectApi.find(
                 id
             );
-            setProject({ name, description, language, company, framework });
+            setProject({ name, description, language, company, framework, dateOfCreation });
         } catch (error) {
             toast.error("Le projet n'a pas pu être chargé");
         }
@@ -55,6 +58,7 @@ const Project = ({match}) => {
 
     // Gestion des changements des inputs dans le formulaire
     const handleChange = ({ currentTarget }) => {
+
         const { name, value } = currentTarget;
         setProject({ ...project, [name]: value });
     }
@@ -157,6 +161,23 @@ const Project = ({match}) => {
                     onChange={handleChange}
                     error={errors.framework}
                 />
+
+                <Datetime
+                    name="dateOfCreation"
+                    label="Date de création"
+                    value={new Date(project.dateOfCreation)}
+                    onChange={handleChange}
+                    error={errors.dateOfCreation}
+                />
+
+                <div className="form-group">
+                    <button type="submit" className="submitEditProject">
+                        Enregistrer
+                    </button>
+                    <Link to="/tous-les-projets" className="btnReturnToProjects">
+                        Retour à la liste
+                    </Link>
+                </div>
 
             </form>
 
