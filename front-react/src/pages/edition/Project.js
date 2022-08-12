@@ -1,39 +1,51 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { toast } from "react-toastify";
+import '../../assets/styles/pages/_project.scss';
+/* import Dropzone from "dropzone"; */
+
+import Navigation from '../../components/Navigation';
 import Footer from '../../components/Footer';
 import Field from '../../components/forms/Field';
 import File from '../../components/forms/File';
 import Textarea from '../../components/forms/Textarea';
-import Navigation from '../../components/Navigation';
-import { toast } from "react-toastify";
-import '../../assets/styles/pages/_project.scss';
-import ProjectApi from '../../services/ProjectApi';
-import { Link, useParams } from 'react-router-dom';
-import Dropzone from "dropzone";
 import Datetime from '../../components/forms/Datetimes';
+
+import ProjectApi from '../../services/ProjectApi';
+import ImageApi from '../../services/ImageApi';
 
 
 const Project = () => {
-    
-    const id  = useParams().projectId;
-    
+
+    //Récupération de l'id dans l'URL
+    const id = useParams().projectId;
+
+    const [selectedFile, setSelectedFile] = useState();
+	const [isFilePicked, setIsFilePicked] = useState(false);
+
+    //Constantes pour les inputs du projet (initialisés vides)
     const [project, setProject] = useState({
         name: "",
         description: "",
         language: "",
         company: "",
         framework: "",
-        dateOfCreation:""
+        dateOfCreation:"",
+        thumbnail: ""
     });
 
+    //Contantes pour les erreurs (initialisées vides)
     const [errors, setErrors] = useState({
         name: "",
         description: "",
         language: "",
         company: "",
         framework: "",
-        dateOfCreation:""
+        dateOfCreation:"",
+        thumbnail: ""
     });
 
+    //Constante pour l'édition
     const [editing, setEditing] = useState(false);
 
     // Récupération du projet en fonction de l'identifiant
@@ -48,19 +60,29 @@ const Project = () => {
         }
     };
 
-    // Chargement du customer si besoin au chargement du composant ou au changement de l'identifiant
-        useEffect(() => {
-            if (id !== "new") {
+    // Chargement du projet si besoin au chargement du composant ou au changement de l'identifiant
+    useEffect(() => {
+        if (id !== "creation") {
             setEditing(true);
             fetchProject(id);
-            }
-        }, [id]);
+        }
+    }, [id]);
 
     // Gestion des changements des inputs dans le formulaire
     const handleChange = ({ currentTarget }) => {
-
         const { name, value } = currentTarget;
         setProject({ ...project, [name]: value });
+    }
+
+    //Gestion des changement de la date
+    const handleDate = (date) => {
+        setProject({ ...project, 'dateOfCreation' : new Date(date._d) });
+    }
+
+    //Gestion des fichiers
+    const handleThumbnail = ({currentTarget}) => {
+        setSelectedFile(currentTarget.files[0]);
+        setIsFilePicked(true);
     }
 
     // Gestion de la soumission du formulaire
@@ -71,9 +93,10 @@ const Project = () => {
             setErrors({});
 
             if (editing) {
+                //await ImageApi.create(id, thumbnail);
                 await ProjectApi.update(id, project);
                 toast.success("Le client a bien été modifié");
-            } else {
+            }else {
                 await ProjectApi.create(project);
                 toast.success("Le client a bien été créé");
             }
@@ -117,24 +140,6 @@ const Project = () => {
                     type='textarea'
                 />
 
-                <File
-                    name="thumbnail"
-                    label="Vignette"
-                    value=''
-                    className="formProject-Thumbnail"
-                    onChange={handleChange}
-                    error=''
-                />
-
-                <File
-                    name="secondPicture"
-                    label="Image de couverture"
-                    value=''
-                    className="formProject-SecondPicture"
-                    onChange={handleChange}
-                    error=''
-                />
-
                 <Field
                     name="company"
                     label="Entreprise"
@@ -166,8 +171,17 @@ const Project = () => {
                     name="dateOfCreation"
                     label="Date de création"
                     value={new Date(project.dateOfCreation)}
-                    onChange={handleChange}
+                    onChange={handleDate}
                     error={errors.dateOfCreation}
+                />
+
+                <File
+                    name="thumbnail"
+                    label="Vignette"
+                    value=''
+                    className="formProject-Thumbnail"
+                    onChange={handleThumbnail}
+                    error=''
                 />
 
                 <div className="form-group">

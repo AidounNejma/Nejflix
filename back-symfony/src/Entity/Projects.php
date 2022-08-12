@@ -2,10 +2,14 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\ProjectsRepository;
+use App\Entity\MediaObject;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProjectsRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ProjectsRepository::class)]
 #[ApiResource]
@@ -26,15 +30,6 @@ class Projects
     private ?string $company = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $thumbnail = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $video = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $secondPicture = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
     private ?string $language = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -42,6 +37,12 @@ class Projects
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateOfCreation = null;
+
+    #[ORM\ManyToOne(inversedBy: 'thumbnailProjects')]
+    #[ORM\JoinColumn(nullable: true)]
+    #[ApiProperty(iri: 'https://schema.org/thumbnail')]
+    private ?MediaObject $thumbnail = null;
+
 
     public function getId(): ?int
     {
@@ -96,30 +97,6 @@ class Projects
         return $this;
     }
 
-    public function getVideo(): ?string
-    {
-        return $this->video;
-    }
-
-    public function setVideo(?string $video): self
-    {
-        $this->video = $video;
-
-        return $this;
-    }
-
-    public function getSecondPicture(): ?string
-    {
-        return $this->secondPicture;
-    }
-
-    public function setSecondPicture(?string $secondPicture): self
-    {
-        $this->secondPicture = $secondPicture;
-
-        return $this;
-    }
-
     public function getLanguage(): ?string
     {
         return $this->language;
@@ -155,4 +132,6 @@ class Projects
 
         return $this;
     }
+
+
 }
