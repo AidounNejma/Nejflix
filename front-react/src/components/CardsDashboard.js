@@ -1,8 +1,9 @@
 import React from 'react';
 import '../assets/styles/components/_cards.scss';
 
-const Cards = () => {
+const CardsDashboard = () => {
 
+    //Effet de glissement lors du hover d'une carte
     const panels = document.querySelectorAll(".panelCards");
 
     panels.forEach((panel) => {
@@ -45,4 +46,4 @@ const Cards = () => {
     );
 };
 
-export default Cards;
+export default CardsDashboard;

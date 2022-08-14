@@ -71,9 +71,17 @@ class MediaObject
     #[ORM\OneToMany(mappedBy: 'thumbnail', targetEntity: Projects::class)]
     private Collection $thumbnailProjects;
 
+    #[ORM\OneToMany(mappedBy: 'thumbnail', targetEntity: Experience::class)]
+    private Collection $thumbnailExperiences;
+
+    #[ORM\OneToMany(mappedBy: 'thumbnail', targetEntity: Education::class)]
+    private Collection $thumbnailEducation;
+
     public function __construct()
     {
         $this->thumbnailProjects = new ArrayCollection();
+        $this->thumbnailExperiences = new ArrayCollection();
+        $this->thumbnailEducation = new ArrayCollection();
     }
 
     
@@ -106,6 +114,66 @@ class MediaObject
             // set the owning side to null (unless already changed)
             if ($thumbnailProject->getThumbnail() === $this) {
                 $thumbnailProject->setThumbnail(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, thumbnailExperiences>
+     */
+    public function getExperiences(): Collection
+    {
+        return $this->thumbnailExperiences;
+    }
+
+    public function addExperience(Experience $experience): self
+    {
+        if (!$this->experiences->contains($experience)) {
+            $this->experiences->add($experience);
+            $experience->setThumbnail($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExperience(Experience $thumbnailExperiences): self
+    {
+        if ($this->experiences->removeElement($thumbnailExperiences)) {
+            // set the owning side to null (unless already changed)
+            if ($thumbnailExperiences->getThumbnail() === $this) {
+                $thumbnailExperiences->setThumbnail(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Education>
+     */
+    public function getThumbnailEducation(): Collection
+    {
+        return $this->thumbnailEducation;
+    }
+
+    public function addThumbnailEducation(Education $thumbnailEducation): self
+    {
+        if (!$this->thumbnailEducation->contains($thumbnailEducation)) {
+            $this->thumbnailEducation->add($thumbnailEducation);
+            $thumbnailEducation->setThumbnail($this);
+        }
+
+        return $this;
+    }
+
+    public function removeThumbnailEducation(Education $thumbnailEducation): self
+    {
+        if ($this->thumbnailEducation->removeElement($thumbnailEducation)) {
+            // set the owning side to null (unless already changed)
+            if ($thumbnailEducation->getThumbnail() === $this) {
+                $thumbnailEducation->setThumbnail(null);
             }
         }
 

@@ -5,10 +5,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import '../assets/styles/components/_netslider.scss';
+import Slide from './Slide';
 
 
 
-const Netslider = ({projects, openModal, setProject}) => {
+const Netslider = ({projects, openModal, setProject, title}) => {
     
     const handleOpen = (id) => {
         setProject(projects.find(x => x.id === id));
@@ -17,7 +18,7 @@ const Netslider = ({projects, openModal, setProject}) => {
 
     return (
         <div className="netslider-wrapper">
-            <h2>Mes projets</h2>
+            <h2>{title}</h2>
             <Swiper
                 modules={[Navigation]}
                 spaceBetween={30}
@@ -31,13 +32,7 @@ const Netslider = ({projects, openModal, setProject}) => {
                         key={project.id} 
                         onClick={()=> handleOpen(project.id)}
                     >
-                        <button>
-                            <img
-                            src="https://occ-0-1567-1123.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRvngexxF8H1-OzRWFSj6ddD-aB93tTBP9kMNz3cIVfuIfLEP1E_0saiNAwOtrM6xSOXvoiSCMsihWSkW0dq808-R7_lBnr6WHbjkKBX6I3sD0uCcS8kSPbRjEDdG8CeeVXEAEV6spQ.webp"
-                            alt="Describe" />
-
-                            <h1 className="heading">{project.name}</h1>
-                        </button>
+                        <Slide project={project} />
                     </SwiperSlide>
                 ))};
                 

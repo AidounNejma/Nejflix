@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
-import Cards from '../components/Cards';
+import CardsDashboard from '../components/CardsDashboard';
 
 import '../assets/styles/pages/_dashboard.scss';
 
@@ -24,7 +24,7 @@ const Dashboard = () => {
             <Navigation/>
                 <h1 className='dashboardTitle'>Bonjour {name}.</h1>
                 <p className='dashboardSubtitle'>Que devons-nous faire aujourd'hui ?</p>
-                <Cards/>
+                <CardsDashboard/>
             <Footer/>
         </div>
     );

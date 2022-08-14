@@ -10,13 +10,10 @@ const CardsAdmin = ({projects}) => {
     return (
 
         <div className="row">
-
             {projects.map(project=> (
-
+                
                 <CardAdmin project={project} key={project.id}/>
-
             ))}
-            
         </div>
     );
 };

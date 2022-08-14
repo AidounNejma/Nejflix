@@ -7,7 +7,7 @@ const CardAdmin = ({project}) => {
 
     const [thumb, setThumb] = useState([]);
 
-
+    //Requête pour récupérer l'image de couverture
     useEffect(() => {
         axios.get('https://127.0.0.1:8000' + project.thumbnail).then( resp => {
 
@@ -16,9 +16,8 @@ const CardAdmin = ({project}) => {
 
         });
     });
-    
-    
-    
+
+    //Tableau des mois raccourcis
     const monthNames = {
         1: "Jan", 
         2: "Fev", 
@@ -34,6 +33,7 @@ const CardAdmin = ({project}) => {
         12: "Dec"
     };
 
+    //Fonction pour archiver un projet
     const archiveProject = () => {
         Swal.fire({
             title: '<strong>Archiver le projet</strong>',
@@ -58,7 +58,7 @@ const CardAdmin = ({project}) => {
         });
     }
 
-
+    //Fonction pour supprimer un projet
     const deleteProject = () => {
         Swal.fire({
             title: '<strong>Supprimer le projet</strong>',
@@ -82,7 +82,6 @@ const CardAdmin = ({project}) => {
             }
         });
     }
-
 
     return (
         <div className="example-1 cardAdmin">

@@ -17,7 +17,6 @@ const NejflixModal = ({opened, setIsOpened, setProject}) => {
         }else{
             setIconMuted(volume0);
         }
-        
     }
 
     return (

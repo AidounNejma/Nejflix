@@ -12,23 +12,23 @@ const About = () => {
     const [show, setShow] = useState(false);
     const [projects, setProjects] = useState([]);
     const [project, setProject] = useState([]);
+    const [title, setTitle] = useState([]);
 
     useEffect(()=>{
         (async () => {
             await axios.get('projects').then((response)=>{
                 setProjects(response.data['hydra:member']);
+                setTitle('Mes projets');
             });
             
         })();
-    }, []);
-
-    
+    }, [title]);
 
     return (
         <div>
             <Navigation />
             <MainHeader />
-            <NetSlider projects={projects} openModal={setShow} setProject={setProject}/>
+            <NetSlider projects={projects} openModal={setShow} title={title} setProject={setProject}/>
             <NejflixModal opened={show} setIsOpened={setShow} setProject={project} />
             <Footer />
         </div>

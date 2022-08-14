@@ -2,16 +2,14 @@
 
 namespace App\Entity;
 
-use App\Entity\MediaObject;
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\ExperienceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ProjectsRepository;
-use ApiPlatform\Core\Annotation\ApiProperty;
-use ApiPlatform\Core\Annotation\ApiResource;
 
-#[ORM\Entity(repositoryClass: ProjectsRepository::class)]
+#[ORM\Entity(repositoryClass: ExperienceRepository::class)]
 #[ApiResource]
-class Projects
+class Experience
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,7 +19,7 @@ class Projects
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -36,9 +34,7 @@ class Projects
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateOfCreation = null;
 
-    #[ORM\ManyToOne(inversedBy: MediaObject::class)]
-    #[ORM\JoinColumn(nullable: true)]
-    #[ApiProperty(iri: 'https://schema.org/thumbnail')]
+    #[ORM\ManyToOne(inversedBy: 'experiences')]
     private ?MediaObject $thumbnail = null;
 
     public function getId(): ?int
@@ -82,18 +78,6 @@ class Projects
         return $this;
     }
 
-    public function getThumbnail():MediaObject
-    {
-        return $this->thumbnail;
-    }
-
-    public function setThumbnail(?MediaObject $thumbnail): self
-    {
-        $this->thumbnail = $thumbnail;
-
-        return $this;
-    }
-
     public function getLanguage(): ?string
     {
         return $this->language;
@@ -130,5 +114,15 @@ class Projects
         return $this;
     }
 
+    public function getThumbnail(): ?MediaObject
+    {
+        return $this->thumbnail;
+    }
 
+    public function setThumbnail(?MediaObject $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
 }
