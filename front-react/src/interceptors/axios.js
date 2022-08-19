@@ -1,18 +1,17 @@
 import axios from "axios";
-
+import { API_URL } from "../config";
 //Url de base pour les appels à l'API
-const BASE_URL = "https://127.0.0.1:8000/api/";
 
 export default axios.create({
 
-    baseURL : BASE_URL,
+    baseURL : API_URL,
     
     withCredentials: true
 });
 
 export const axiosPrivate = axios.create({
     
-    baseURL : BASE_URL,
+    baseURL : API_URL,
     headers: {
         'Content-Type' : 'application/json',
         "Access-Control-Allow-Origin": "*",

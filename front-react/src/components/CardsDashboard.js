@@ -26,7 +26,7 @@ const CardsDashboard = () => {
                 <h3>Mes projets</h3>
             </a>
 
-            <a href="/"className="panelCards" >
+            <a href="/toutes-les-experiences"className="panelCards" >
                 <h3>Mes expériences</h3>
             </a>
 

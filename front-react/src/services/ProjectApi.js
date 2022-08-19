@@ -74,5 +74,5 @@ export default {
     find,
     create,
     update,
-    delete: deleteProject
+    deleteProject
 };

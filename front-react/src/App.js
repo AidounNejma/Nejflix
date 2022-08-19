@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import AnimatedRoute from './components/AnimatedRoute';
 import Project from './pages/edition/Project';
+import Experiences from './pages/Experiences';
 
 
 const App = () => {
@@ -48,6 +49,22 @@ const App = () => {
                                 element={
                                     <PrivateRoute>
                                         <Project/>
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route 
+                                path="creation-du-projet" 
+                                element={
+                                    <PrivateRoute>
+                                        <Project/>
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route 
+                                path="toutes-les-experiences/*" 
+                                element={
+                                    <PrivateRoute>
+                                        <Experiences/>
                                     </PrivateRoute>
                                 }
                             />

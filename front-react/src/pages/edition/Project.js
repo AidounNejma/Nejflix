@@ -16,10 +16,20 @@ import axios from '../../interceptors/axios';
 
 
 const Project = () => {
-
     //Récupération de l'id dans l'URL
-    const id = useParams().projectId;
+    const params = useParams();
+    
+    //Initialisation de la variable id avec "creation"
+    var id = 'creation';
+    var title = 'Créer un projet';
+    
+    //S'il y a un id dans l'url, c'est une edition
+    if(params.projectId){
+        id = params.projectId;
+        title = "Editer un projet"
+    }
 
+    // Constantes pour les fichiers 
     const [selectedFile, setSelectedFile] = useState();
 	const [isFilePicked, setIsFilePicked] = useState(false);
 
@@ -105,7 +115,6 @@ const Project = () => {
         });
     }
 
-
     // Gestion de la soumission du formulaire
     const handleSubmit = async event => {
         event.preventDefault();
@@ -140,7 +149,7 @@ const Project = () => {
             <Navigation />
 
             <form onSubmit={handleSubmit} className="formEditionProject">
-                <h1>Editer un projet</h1>
+                <h1>{title}</h1>
                 <Field
                     name="name"
                     label="Nom du projet"

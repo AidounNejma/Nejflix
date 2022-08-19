@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import {BASE_URL} from '../config';
 
 const Slide = ({project}) => {
     const [thumb, setThumb] = useState([]);
 
     //Requête pour récupérer l'image de couverture
     useEffect(() => {
-        axios.get('https://127.0.0.1:8000' + project.thumbnail).then( resp => {
+        axios.get(BASE_URL + project.thumbnail).then( resp => {
 
             setThumb({'path': resp.data.contentUrl});
             return resp.data.contentUrl
@@ -16,7 +17,7 @@ const Slide = ({project}) => {
 
     return (
         <button>
-            <div style={{background: `url(http://127.0.0.1:8000${thumb.path})`}} className='thumbnailSwiper'>
+            <div style={{background: `url(${BASE_URL + thumb.path})`}} className='thumbnailSwiper'>
                 <h1 className="heading">{project.name}</h1>
             </div>
         </button>
