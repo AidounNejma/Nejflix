@@ -9,10 +9,10 @@ import Slide from './Slide';
 
 
 
-const Netslider = ({projects, openModal, setProject, title}) => {
+const Netslider = ({elements, setElements, openModal, title}) => {
     
     const handleOpen = (id) => {
-        setProject(projects.find(x => x.id === id));
+        setElements(elements.find(x => x.id === id));
         openModal(true)
     };
 
@@ -26,13 +26,13 @@ const Netslider = ({projects, openModal, setProject, title}) => {
                 navigation
                 className='section'
             >
-                {projects.map(project=> (
+                {elements.map(element=> (
                     <SwiperSlide 
                         className='item' 
-                        key={project.id} 
-                        onClick={()=> handleOpen(project.id)}
+                        key={element.id} 
+                        onClick={()=> handleOpen(element.id)}
                     >
-                        <Slide project={project} />
+                        <Slide element={element} />
                     </SwiperSlide>
                 ))};
                 

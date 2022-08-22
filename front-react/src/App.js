@@ -11,6 +11,9 @@ import Projects from './pages/Projects';
 import AnimatedRoute from './components/AnimatedRoute';
 import Project from './pages/edition/Project';
 import Experiences from './pages/Experiences';
+import Experience from './pages/edition/Experience';
+import Educations from './pages/Educations';
+import Education from './pages/edition/Education';
 
 
 const App = () => {
@@ -65,6 +68,46 @@ const App = () => {
                                 element={
                                     <PrivateRoute>
                                         <Experiences/>
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route 
+                                path="edition-experience/:experienceId" 
+                                element={
+                                    <PrivateRoute>
+                                        <Experience/>
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route 
+                                path="creation-experience" 
+                                element={
+                                    <PrivateRoute>
+                                        <Experience/>
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route 
+                                path="toutes-les-formations/*" 
+                                element={
+                                    <PrivateRoute>
+                                        <Educations/>
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route 
+                                path="edition-formation/:educationId" 
+                                element={
+                                    <PrivateRoute>
+                                        <Education/>
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route 
+                                path="creation-formation" 
+                                element={
+                                    <PrivateRoute>
+                                        <Education/>
                                     </PrivateRoute>
                                 }
                             />

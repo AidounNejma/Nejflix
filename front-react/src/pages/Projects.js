@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import CardsAdmin from '../components/CardsAdmin';
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
@@ -25,7 +26,10 @@ const Projects = () => {
     return (
         <div>
             <Navigation/>
-                <CardsAdmin projects={projects}/>
+                <div className='containerLinkCreate'>
+                    <Link to={"/creation-du-projet/"} className="linkCreateProject">Créer un projet</Link>
+                </div>
+                <CardsAdmin props={projects}/>
             <Footer/>
         </div>
     );

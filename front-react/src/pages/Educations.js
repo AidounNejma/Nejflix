@@ -6,14 +6,14 @@ import Navigation from '../components/Navigation';
 
 import axios from '../interceptors/axios';
 
-const Experiences = () => {
-    const [experiences, setExperiences] = useState([]);
+const Educations = () => {
+    const [educations, setEducations] = useState([]);
     
     useEffect(()=>{
         (async () => {
-            await axios.get('experiences').then((response)=>{
+            await axios.get('education').then((response)=>{
                 
-                setExperiences(response.data['hydra:member']);
+                setEducations(response.data['hydra:member']);
             });
             
         })();
@@ -23,12 +23,12 @@ const Experiences = () => {
         <div>
             <Navigation/>
                 <div className='containerLinkCreate'>
-                    <Link to={"/creation-experience"} className="linkCreateProject">Créer une expérience</Link>
+                    <Link to={"/creation-formation"} className="linkCreateProject">Créer une formation</Link>
                 </div>
-                <CardsAdmin props={experiences}/>
+                <CardsAdmin props={educations}/>
             <Footer/>
         </div>
     );
 };
 
-export default Experiences;
+export default Educations;

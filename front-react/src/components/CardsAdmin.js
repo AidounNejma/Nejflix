@@ -1,23 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../assets/styles/components/_cardsAdmin.scss';
 import CardAdmin from './CardAdmin';
 
 
 
-const CardsAdmin = ({projects}) => {
+const CardsAdmin = ({props}) => {
     
 
     return (
         <div>
-            <div className='containerLinkCreate'>
-                <Link to={"/creation-du-projet/"} className="linkCreateProject">Créer un projet</Link>
-            </div>
             <div className="row">
                 
-                {projects.map(project=> (
+                {props.map(prop=> (
                     
-                    <CardAdmin project={project} key={project.id}/>
+                    <CardAdmin element={prop} key={prop.id}/>
                 ))}
             </div>
         </div>

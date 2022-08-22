@@ -30,7 +30,7 @@ const CardsDashboard = () => {
                 <h3>Mes expériences</h3>
             </a>
 
-            <a href="/" className="panelCards">
+            <a href="/toutes-les-formations" className="panelCards">
                 <h3>Mes formations</h3>
             </a>
 

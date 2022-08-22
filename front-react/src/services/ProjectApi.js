@@ -27,7 +27,7 @@ async function find(id) {
     });
 }
 
-function deleteProject(id) {
+function deleteApi(id) {
     return axios.delete("projects/" + id).then(async response => {
         const cachedProjects = await Cache.get("projects");
 
@@ -74,5 +74,5 @@ export default {
     find,
     create,
     update,
-    deleteProject
+    deleteApi
 };
