@@ -41,7 +41,8 @@ const Experience = () => {
         company: "",
         framework: "",
         dateOfCreation:"",
-        thumbnail: ""
+        thumbnail: "",
+        video: ""
     });
 
     //Contantes pour les erreurs (initialisées vides)
@@ -52,7 +53,8 @@ const Experience = () => {
         company: "",
         framework: "",
         dateOfCreation:"",
-        thumbnail: ""
+        thumbnail: "",
+        video: ""
     });
 
     //Constante pour l'édition
@@ -89,7 +91,7 @@ const Experience = () => {
         setExperience({ ...experience, 'dateOfCreation' : new Date(date._d) });
     }
 
-    //Gestion des fichiers
+    //Gestion des fichiers thumbnail
     const handleThumbnail = async ({currentTarget}) => {
         setSelectedFile(selectedFile, currentTarget.files[0]);
         setIsFilePicked(isFilePicked, true);
@@ -114,6 +116,34 @@ const Experience = () => {
             return response;
         });
     }
+
+    //Gestion des fichiers Vidéo
+    const handleVideo = async ({currentTarget}) => {
+        setSelectedFile(selectedFile, currentTarget.files[0]);
+        setIsFilePicked(isFilePicked, true);
+        
+        const formData = new FormData();
+        
+        //On met le fichier dans la variable formData
+		formData.append('file', currentTarget.files[0]);
+        
+        // Requête à l'API pour envoyer le fichier
+        await axios.post('media_objects', formData,  {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then(response => {
+
+            console.log(response);
+            //On insère l'url dans le champ thumbnail de l'entité experience
+            setExperience({ ...experience, 'video' : response.data['@id'] });
+
+            return response;
+        });
+    }
+
+    
 
     // Gestion de la soumission du formulaire
     const handleSubmit = async event => {
@@ -209,6 +239,14 @@ const Experience = () => {
                     label="Vignette"
                     className="formProject-Thumbnail"
                     onChange={handleThumbnail}
+                    error=''
+                />
+
+                <File
+                    name="video"
+                    label="video"
+                    className="formProject-Thumbnail"
+                    onChange={handleVideo}
                     error=''
                 />
 

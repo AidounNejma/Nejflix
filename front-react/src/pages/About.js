@@ -37,7 +37,7 @@ const About = () => {
             <NetSlider elements={projects} openModal={setShow} setElements={setElements}/>
             <NetSlider elements={experiences} openModal={setShow} setElements={setElements}/>
             <NetSlider elements={educations} openModal={setShow} setElements={setElements}/>
-            <NejflixModal opened={show} setIsOpened={setShow} setElement={elements} />
+            <NejflixModal opened={show} setIsOpened={setShow} element={elements} />
             <Footer />
         </div>
     );

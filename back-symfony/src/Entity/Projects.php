@@ -41,6 +41,11 @@ class Projects
     #[ApiProperty(iri: 'https://schema.org/thumbnail')]
     private ?MediaObject $thumbnail = null;
 
+    #[ORM\ManyToOne(inversedBy: 'projectsVideo')]
+    #[ORM\JoinColumn(nullable: true)]
+    #[ApiProperty(iri: 'https://schema.org/video')]
+    private ?MediaObject $video = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -126,6 +131,18 @@ class Projects
     public function setDateOfCreation(?\DateTimeInterface $dateOfCreation): self
     {
         $this->dateOfCreation = $dateOfCreation;
+
+        return $this;
+    }
+
+    public function getVideo(): ?MediaObject
+    {
+        return $this->video;
+    }
+
+    public function setVideo(?MediaObject $video): self
+    {
+        $this->video = $video;
 
         return $this;
     }

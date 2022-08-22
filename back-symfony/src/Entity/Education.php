@@ -37,6 +37,9 @@ class Education
     #[ORM\ManyToOne(inversedBy: 'thumbnailEducation')]
     private ?MediaObject $thumbnail = null;
 
+    #[ORM\ManyToOne(inversedBy: 'educationVideo')]
+    private ?MediaObject $video = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -122,6 +125,18 @@ class Education
     public function setThumbnail(?MediaObject $thumbnail): self
     {
         $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    public function getVideo(): ?MediaObject
+    {
+        return $this->video;
+    }
+
+    public function setVideo(?MediaObject $video): self
+    {
+        $this->video = $video;
 
         return $this;
     }

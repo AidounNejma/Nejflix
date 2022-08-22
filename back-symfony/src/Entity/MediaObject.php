@@ -77,11 +77,23 @@ class MediaObject
     #[ORM\OneToMany(mappedBy: 'thumbnail', targetEntity: Education::class)]
     private Collection $thumbnailEducation;
 
+    #[ORM\OneToMany(mappedBy: 'video', targetEntity: Projects::class)]
+    private Collection $projectsVideo;
+
+    #[ORM\OneToMany(mappedBy: 'video', targetEntity: Education::class)]
+    private Collection $educationVideo;
+
+    #[ORM\OneToMany(mappedBy: 'video', targetEntity: Experience::class)]
+    private Collection $experiencesVideo;
+
     public function __construct()
     {
         $this->thumbnailProjects = new ArrayCollection();
         $this->thumbnailExperiences = new ArrayCollection();
         $this->thumbnailEducation = new ArrayCollection();
+        $this->projectsVideo = new ArrayCollection();
+        $this->educationVideo = new ArrayCollection();
+        $this->experiencesVideo = new ArrayCollection();
     }
 
     
@@ -174,6 +186,96 @@ class MediaObject
             // set the owning side to null (unless already changed)
             if ($thumbnailEducation->getThumbnail() === $this) {
                 $thumbnailEducation->setThumbnail(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Projects>
+     */
+    public function getProjectsVideo(): Collection
+    {
+        return $this->projectsVideo;
+    }
+
+    public function addProjectsVideo(Projects $projectsVideo): self
+    {
+        if (!$this->projectsVideo->contains($projectsVideo)) {
+            $this->projectsVideo->add($projectsVideo);
+            $projectsVideo->setVideo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjectsVideo(Projects $projectsVideo): self
+    {
+        if ($this->projectsVideo->removeElement($projectsVideo)) {
+            // set the owning side to null (unless already changed)
+            if ($projectsVideo->getVideo() === $this) {
+                $projectsVideo->setVideo(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Education>
+     */
+    public function getEducationVideo(): Collection
+    {
+        return $this->educationVideo;
+    }
+
+    public function addEducationVideo(Education $educationVideo): self
+    {
+        if (!$this->educationVideo->contains($educationVideo)) {
+            $this->educationVideo->add($educationVideo);
+            $educationVideo->setVideo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEducationVideo(Education $educationVideo): self
+    {
+        if ($this->educationVideo->removeElement($educationVideo)) {
+            // set the owning side to null (unless already changed)
+            if ($educationVideo->getVideo() === $this) {
+                $educationVideo->setVideo(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Experience>
+     */
+    public function getExperiencesVideo(): Collection
+    {
+        return $this->experiencesVideo;
+    }
+
+    public function addExperiencesVideo(Experience $experiencesVideo): self
+    {
+        if (!$this->experiencesVideo->contains($experiencesVideo)) {
+            $this->experiencesVideo->add($experiencesVideo);
+            $experiencesVideo->setVideo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExperiencesVideo(Experience $experiencesVideo): self
+    {
+        if ($this->experiencesVideo->removeElement($experiencesVideo)) {
+            // set the owning side to null (unless already changed)
+            if ($experiencesVideo->getVideo() === $this) {
+                $experiencesVideo->setVideo(null);
             }
         }
 
