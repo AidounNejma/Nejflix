@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { PUBLIC_KEY_EMAILJS, SERVICE_EMAILJS, TEMPLATE_EMAILJS } from '../config';
 import Nav from '../components/Navigation';
@@ -25,6 +25,16 @@ const ContactMe = () => {
     const [message, setMessage] = useState('Bonjour, je souhaiterais prendre contact avec vous...'); 
     const [valid, setValid] = useState('true');
 
+    // Fonction pour vérifier si l'email est valide
+    var emailRegExp = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+    function isEmail (value) {
+        if(emailRegExp.test(value) === true){
+            setValid('true')
+        }else{
+            setValid('false')
+        }
+    }
 
     const handleName = (e) => {
         setName(e.target.value)
@@ -32,11 +42,13 @@ const ContactMe = () => {
 
     const handleEmail = (e) => {
         setEmail(e.target.value)
+        isEmail(e.target.value)
     }
 
     const handleMessage = (e) => {
         setMessage(e.target.value)
     }
+
 
     return (
         <div>
