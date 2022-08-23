@@ -10,7 +10,7 @@ import NejflixModal from '../components/NejflixModal';
 const About = () => {
 
     const [show, setShow] = useState(false);
-    const [elements, setElements] = useState([]);
+    const [element, setElements] = useState([]);
     const [projects, setProjects] = useState([]);
     const [experiences, setExperiences] = useState([]);
     const [educations, setEducations] = useState([]);
@@ -30,14 +30,17 @@ const About = () => {
         })();
     }, []);
 
+    
+
+
     return (
         <div>
             <Navigation />
             <MainHeader />
-            <NetSlider elements={projects} openModal={setShow} setElements={setElements}/>
-            <NetSlider elements={experiences} openModal={setShow} setElements={setElements}/>
-            <NetSlider elements={educations} openModal={setShow} setElements={setElements}/>
-            <NejflixModal opened={show} setIsOpened={setShow} element={elements} />
+            <NetSlider elements={projects} element={element} openModal={setShow} setElements={setElements} title="Mes projets"/>
+            <NetSlider elements={experiences} element={element} openModal={setShow} setElements={setElements} title="Mes expériences"/>
+            <NetSlider elements={educations} element={element} openModal={setShow} setElements={setElements} title="Mes formations"/>
+            <NejflixModal opened={show} setIsOpened={setShow} element={element} />
             <Footer />
         </div>
     );

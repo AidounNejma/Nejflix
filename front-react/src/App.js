@@ -14,6 +14,7 @@ import Experiences from './pages/Experiences';
 import Experience from './pages/edition/Experience';
 import Educations from './pages/Educations';
 import Education from './pages/edition/Education';
+import ContactMe from './pages/ContactMe';
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
                             <Route path="/" element={ <Home/> }/> 
                             <Route path="a-propos" element={<About />} />
                             <Route path="connexion" element={<LogIn />} />
+                            <Route path="contact" element={<ContactMe />} />
                             <Route 
                                 path="tableau-de-bord/*" 
                                 element={

@@ -8,12 +8,11 @@ import '../assets/styles/components/_netslider.scss';
 import Slide from './Slide';
 
 
-
 const Netslider = ({elements, setElements, openModal, title}) => {
     
     const handleOpen = (id) => {
         setElements(elements.find(x => x.id === id));
-        openModal(true)
+        openModal(true);
     };
 
     return (

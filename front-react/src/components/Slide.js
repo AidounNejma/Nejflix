@@ -13,7 +13,7 @@ const Slide = ({element}) => {
             return resp.data.contentUrl
 
         });
-    });
+    }, []);
 
     return (
         <button>

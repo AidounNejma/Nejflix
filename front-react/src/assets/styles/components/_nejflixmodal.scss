@@ -12,9 +12,7 @@ $white: #ffffff;
     justify-content: center;
     align-items: center;
     color: #ffffff;
-    min-height: 100vh;
     background-color: $background;
-    
 }
 
 #wrapperModal>button {
@@ -56,6 +54,7 @@ $white: #ffffff;
     position: absolute;
     top: 100%;
     margin: auto;
+    min-height: 100vh;
 }
 .modal.closed {
     display: none;

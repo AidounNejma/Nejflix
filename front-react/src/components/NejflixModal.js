@@ -27,22 +27,22 @@ const NejflixModal = ({opened, setIsOpened, element}) => {
 
     //Requête pour récupérer l'image de couverture et la video
     useEffect(() => {
-        (async () => {
-            await axios.get(BASE_URL + element.thumbnail).then( resp => {
+        axios.all(
+            axios.get(BASE_URL + element.thumbnail).then( resp => {
 
-                setThumb({'path': resp.data.contentUrl});
+                setThumb({'path': BASE_URL + resp.data.contentUrl});
                 return resp.data.contentUrl
 
-            });
+            }),
 
-            await axios.get(BASE_URL + element.video).then( resp => {
+            axios.get(BASE_URL + element.video).then( resp => {
 
-                setVideo({'path': resp.data.contentUrl});
+                setVideo({'path': BASE_URL + resp.data.contentUrl});
                 return resp.data.contentUrl
 
-            });
-        })();
-    });
+            })
+        )
+    }, []);
 
     return (
 
@@ -50,8 +50,8 @@ const NejflixModal = ({opened, setIsOpened, element}) => {
 
             <div className={`modal ${opened ? '' : 'closed'}`}>
                 <div className="modal-header">
-                    <video autoPlay loop muted={muted} poster={`${BASE_URL + thumb.path}`}>
-                        <source src={`${BASE_URL + video.path}`} />
+                    <video autoPlay loop muted={muted} poster={thumb.path}>
+                        <source src={video.path} />
                     </video>
 
                     <button type="button" className="close" onClick={()=>setIsOpened(false)}>
