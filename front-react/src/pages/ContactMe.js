@@ -20,12 +20,23 @@ const ContactMe = () => {
         });
     };
     
-    const [name, setName] = useState(null);
+    const [name, setName] = useState('Jean Dupont');
+    const [email, setEmail] = useState('jean.dupont@gmail.com');
+    const [message, setMessage] = useState('Bonjour, je souhaiterais prendre contact avec vous...'); 
+    const [valid, setValid] = useState('true');
 
 
-    useEffect(() => {
-        
-    })
+    const handleName = (e) => {
+        setName(e.target.value)
+    }
+
+    const handleEmail = (e) => {
+        setEmail(e.target.value)
+    }
+
+    const handleMessage = (e) => {
+        setMessage(e.target.value)
+    }
 
     return (
         <div>
@@ -36,33 +47,33 @@ const ContactMe = () => {
                     <form ref={form} className='formContact' onSubmit={sendEmail}>
                         <div className='containerInput'>
                             <label>Nom</label>
-                            <input type="text" name="name" />
+                            <input type="text" name="name" onChange={(e) => handleName(e)} />
                         </div>
                         <div className='containerInput'>
                             <label>Email</label>
-                            <input type="email" name="email" />
+                            <input type="email" name="email" onChange={(e) => handleEmail(e)} />
                         </div>
                         <div className='containerInput'>
                             <label>Message</label>
-                            <textarea name="message" />
+                            <textarea name="message" rows="7" onChange={(e) => handleMessage(e)}/>
                         </div>
-                        <input type="submit" value="Envoyer" className='submitButton' />
+                        <input type="submit" value="Envoyer" className='submitButton'  />
                     </form>
                     <div className="debug">
                         <pre>
                             <code>
                                 &#123;
                                 <br/>
-                                <p className='categories'>"name" : "Nejma";</p>
+                                <p className='categories'>"name" : "{name}";</p>
                                 <p className='categories'>"email": &#123;</p>
-                                    <span className='subCategories'>"value": "guermachenejma@gmail.com",</span>
+                                    <span className='subCategories'>"value": "{email}",</span>
                                     <br />   
-                                    <span className='subCategories'>"valid": true</span>
+                                    <span className='subCategories'>"valid": {valid}</span>
                                 
                                 <p className='categories'>&#125;,</p>
             
                                 <p className='categories'>"message": &#123;</p>
-                                    <span className='subCategories'>"text": "Dear Mr. President,",</span>
+                                    <span className='subCategories'>"text": "{message}",</span>
                                     <br />
                                     <span className='subCategories'>"maxlength": 255</span>
 
