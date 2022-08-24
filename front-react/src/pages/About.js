@@ -4,8 +4,9 @@ import NetSlider from '../components/Netslider';
 import Footer from '../components/Footer';
 import {useEffect,useState} from 'react';
 
-import axios from '../interceptors/axios';
+import axios from 'axios';
 import NejflixModal from '../components/NejflixModal';
+import { API_URL } from '../config';
 
 const About = () => {
 
@@ -15,24 +16,24 @@ const About = () => {
     const [experiences, setExperiences] = useState([]);
     const [educations, setEducations] = useState([]);
 
+    let apiUrls = [
+        API_URL + 'projects',
+        API_URL + 'experiences',
+        API_URL + 'education'
+    ];
+
     useEffect( () => {
-        (async () => {
-            await axios.get('projects').then((response)=>{
-                setProjects(response.data['hydra:member']);
-            });
-            await axios.get('experiences').then((response)=>{
-                setExperiences(response.data['hydra:member']);
-            });
-            await axios.get('education').then((response)=>{
-                setEducations(response.data['hydra:member']);
-            });
-            
-        })();
+
+        axios.all(apiUrls.map((apiUrl) => axios.get(apiUrl))).then(
+            axios.spread(({data: projects}, {data:experiences}, {data: education}) => {
+                setProjects(projects['hydra:member']);
+                setExperiences(experiences['hydra:member']);
+                setEducations(education['hydra:member'])
+            })
+        );
     }, []);
 
     
-
-
     return (
         <div>
             <Navigation />
