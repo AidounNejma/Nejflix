@@ -17,7 +17,7 @@ const Slide = ({element}) => {
 
     return (
         <button>
-            <div style={{background: `url(${BASE_URL + thumb.path})`}} className='thumbnailSwiper'>
+            <div style={{background: 'url('+ BASE_URL + thumb.path +')'}} className='thumbnailSwiper'>
                 <h1 className="heading">{element.name}</h1>
             </div>
         </button>

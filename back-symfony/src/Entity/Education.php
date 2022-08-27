@@ -40,6 +40,12 @@ class Education
     #[ORM\ManyToOne(inversedBy: 'educationVideo')]
     private ?MediaObject $video = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $percentage = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $duration = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -137,6 +143,30 @@ class Education
     public function setVideo(?MediaObject $video): self
     {
         $this->video = $video;
+
+        return $this;
+    }
+
+    public function getPercentage(): ?int
+    {
+        return $this->percentage;
+    }
+
+    public function setPercentage(?int $percentage): self
+    {
+        $this->percentage = $percentage;
+
+        return $this;
+    }
+
+    public function getDuration(): ?string
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(?string $duration): self
+    {
+        $this->duration = $duration;
 
         return $this;
     }

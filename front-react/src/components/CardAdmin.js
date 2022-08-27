@@ -16,10 +16,9 @@ const CardAdmin = ({element}) => {
         axios.get(BASE_URL + element.thumbnail).then( resp => {
 
             setThumb({'path': resp.data.contentUrl});
-            return resp.data.contentUrl
 
         });
-    });
+    }, []);
     
     //Initialisation de l'url pour l'édition
     var url = '/edition-du-projet/';

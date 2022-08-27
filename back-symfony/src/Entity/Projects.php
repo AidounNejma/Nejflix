@@ -38,13 +38,19 @@ class Projects
 
     #[ORM\ManyToOne(inversedBy: MediaObject::class)]
     #[ORM\JoinColumn(nullable: true)]
-    #[ApiProperty(iri: 'https://schema.org/thumbnail')]
+    #[ApiProperty(iri: 'https://schema.org/MediaObject')]
     private ?MediaObject $thumbnail = null;
 
     #[ORM\ManyToOne(inversedBy: 'projectsVideo')]
     #[ORM\JoinColumn(nullable: true)]
-    #[ApiProperty(iri: 'https://schema.org/video')]
+    #[ApiProperty(iri: 'https://schema.org/MediaObject')]
     private ?MediaObject $video = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $percentage = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $duration = null;
 
     public function getId(): ?int
     {
@@ -143,6 +149,30 @@ class Projects
     public function setVideo(?MediaObject $video): self
     {
         $this->video = $video;
+
+        return $this;
+    }
+
+    public function getPercentage(): ?int
+    {
+        return $this->percentage;
+    }
+
+    public function setPercentage(?int $percentage): self
+    {
+        $this->percentage = $percentage;
+
+        return $this;
+    }
+
+    public function getDuration(): ?string
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(?string $duration): self
+    {
+        $this->duration = $duration;
 
         return $this;
     }
