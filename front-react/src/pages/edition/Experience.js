@@ -42,7 +42,9 @@ const Experience = () => {
         framework: "",
         dateOfCreation:"",
         thumbnail: "",
-        video: ""
+        video: "",
+        percentage: "",
+        duration: ""
     });
 
     //Contantes pour les erreurs (initialisées vides)
@@ -54,7 +56,9 @@ const Experience = () => {
         framework: "",
         dateOfCreation:"",
         thumbnail: "",
-        video: ""
+        video: "",
+        percentage: "",
+        duration: ""
     });
 
     //Constante pour l'édition
@@ -63,10 +67,10 @@ const Experience = () => {
     // Récupération de l'experience en fonction de l'identifiant
     const fetchExperience = async id => {
         try {
-            const { name, description, language, company, framework, dateOfCreation } = await ExperienceApi.find(
+            const { name, description, language, company, framework, dateOfCreation, percentage, duration } = await ExperienceApi.find(
                 id
             );
-            setExperience({ name, description, language, company, framework, dateOfCreation });
+            setExperience({ name, description, language, company, framework, dateOfCreation, percentage, duration });
         } catch (error) {
             toast.error("Le projet n'a pas pu être chargé");
         }
@@ -224,6 +228,24 @@ const Experience = () => {
                     value={experience.framework}
                     onChange={handleChange}
                     error={errors.framework}
+                />
+
+                <Field
+                    name="percentage"
+                    label="Pourcentage"
+                    placeholder="100"
+                    value={experience.percentage}
+                    onChange={handleChange}
+                    error={errors.percentage}
+                />
+
+                <Field
+                    name="duration"
+                    label="Durée de la vidéo"
+                    placeholder="0m39"
+                    value={experience.duration}
+                    onChange={handleChange}
+                    error={errors.duration}
                 />
 
                 <Datetime

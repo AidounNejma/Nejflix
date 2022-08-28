@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import '../assets/styles/components/_nejflixmodal.scss'
 import { BASE_URL } from '../config';
 
-const NejflixModal = ({opened, setIsOpened, element}) => {
+const NejflixModal = ({opened, setIsOpened, element, setHideThumb}) => {
 
     //Constante pour l'affichage du bouton mute
     const volume0 = 'M11 4.00003C11 3.59557 10.7564 3.23093 10.3827 3.07615C10.009 2.92137 9.57889 3.00692 9.29289 3.29292L4.58579 8.00003H1C0.447715 8.00003 0 8.44774 0 9.00003V15C0 15.5523 0.447715 16 1 16H4.58579L9.29289 20.7071C9.57889 20.9931 10.009 21.0787 10.3827 20.9239C10.7564 20.7691 11 20.4045 11 20V4.00003ZM5.70711 9.70714L9 6.41424V17.5858L5.70711 14.2929L5.41421 14H5H2V10H5H5.41421L5.70711 9.70714ZM15.2929 9.70714L17.5858 12L15.2929 14.2929L16.7071 15.7071L19 13.4142L21.2929 15.7071L22.7071 14.2929L20.4142 12L22.7071 9.70714L21.2929 8.29292L19 10.5858L16.7071 8.29292L15.2929 9.70714Z';
@@ -44,15 +44,22 @@ const NejflixModal = ({opened, setIsOpened, element}) => {
         );
     });
 
+    const [showThumb, setShowThumb] = useState(0);
+
+    const showThumbnail = () => {
+        setShowThumb(1);
+    }
+
     return (
 
         <div id="wrapperModal">
 
             <div className={`modal ${opened ? '' : 'closed'}`}>
                 <div className="modal-header">
-                    <video autoPlay muted={muted} src={video} poster={thumb}>
+                    <div className='wrapperVideoThumbnail' style={{background: `url(${thumb})`, opacity: showThumb}}>
+                    </div>
+                    <video autoPlay muted={muted} src={video} poster={thumb} onEnded={showThumbnail}>
                     </video>
-
                     <button type="button" className="close" onClick={()=>setIsOpened(false)}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="button" aria-label="close" tabIndex="0">
                             <path fillRule="evenodd" clipRule="evenodd" d="M2.29297 3.70706L10.5859 12L2.29297 20.2928L3.70718 21.7071L12.0001 13.4142L20.293 21.7071L21.7072 20.2928L13.4143 12L21.7072 3.70706L20.293 2.29285L12.0001 10.5857L3.70718 2.29285L2.29297 3.70706Z" fill="currentColor"></path>

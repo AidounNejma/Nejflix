@@ -42,7 +42,9 @@ const Education = () => {
         framework: "",
         dateOfCreation:"",
         thumbnail: "",
-        video: ""
+        video: "",
+        percentage: "",
+        duration: ""
     });
 
     //Contantes pour les erreurs (initialisées vides)
@@ -54,7 +56,9 @@ const Education = () => {
         framework: "",
         dateOfCreation:"",
         thumbnail: "",
-        video: ""
+        video: "",
+        percentage: "",
+        duration: ""
     });
 
     //Constante pour l'édition
@@ -63,10 +67,10 @@ const Education = () => {
     // Récupération de la formation en fonction de l'identifiant
     const fetchEducation = async id => {
         try {
-            const { name, description, language, company, framework, dateOfCreation } = await EducationApi.find(
+            const { name, description, language, company, framework, dateOfCreation, percentage, duration } = await EducationApi.find(
                 id
             );
-            setEducation({ name, description, language, company, framework, dateOfCreation });
+            setEducation({ name, description, language, company, framework, dateOfCreation, percentage, duration });
         } catch (error) {
             toast.error("La formation n'a pas pu être chargée");
         }
@@ -222,6 +226,24 @@ const Education = () => {
                     value={education.framework}
                     onChange={handleChange}
                     error={errors.framework}
+                />
+
+                <Field
+                    name="percentage"
+                    label="Pourcentage"
+                    placeholder="100"
+                    value={education.percentage}
+                    onChange={handleChange}
+                    error={errors.percentage}
+                />
+
+                <Field
+                    name="duration"
+                    label="Durée de la vidéo"
+                    placeholder="0m39"
+                    value={education.duration}
+                    onChange={handleChange}
+                    error={errors.duration}
                 />
 
                 <Datetime

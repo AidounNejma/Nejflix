@@ -20,12 +20,22 @@ const Netslider = ({elements, setElements, openModal, title}) => {
             <h2>{title}</h2>
             <Swiper
                 modules={[Navigation]}
-                spaceBetween={30}
+                spaceBetween={20}
                 slidesPerView={4}
                 navigation
                 className='section'
                 breakpoints={{
                     // when window width is >= 640px
+                    360: {
+                        width: 360,
+                        slidesPerView: 1,
+                        spaceBetween:0
+                    },
+                    375: {
+                        width: 375,
+                        slidesPerView: 1,
+                        spaceBetween:0
+                    },
                     390: {
                         width: 390,
                         slidesPerView: 1,
@@ -38,8 +48,13 @@ const Netslider = ({elements, setElements, openModal, title}) => {
                         spaceBetween:0
                     },
                     // when window width is >= 768px
-                    640: {
-                        width: 640,
+                    768: {
+                        width: 768,
+                        slidesPerView: 2,
+                        spaceBetween:10
+                    },
+                    820: {
+                        width: 820,
                         slidesPerView: 2,
                         spaceBetween:10
                     },

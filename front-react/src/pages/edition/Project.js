@@ -42,7 +42,9 @@ const Project = () => {
         framework: "",
         dateOfCreation:"",
         thumbnail: "",
-        video: ""
+        video: "",
+        percentage: "",
+        duration: ""
     });
 
     //Contantes pour les erreurs (initialisées vides)
@@ -54,7 +56,9 @@ const Project = () => {
         framework: "",
         dateOfCreation:"",
         thumbnail: "",
-        video: ""
+        video: "",
+        percentage:"",
+        duration: ""
     });
 
     //Constante pour l'édition
@@ -63,10 +67,10 @@ const Project = () => {
     // Récupération du projet en fonction de l'identifiant
     const fetchProject = async id => {
         try {
-            const { name, description, language, company, framework, dateOfCreation } = await ProjectApi.find(
+            const { name, description, language, company, framework, dateOfCreation, percentage, duration } = await ProjectApi.find(
                 id
             );
-            setProject({ name, description, language, company, framework, dateOfCreation });
+            setProject({ name, description, language, company, framework, dateOfCreation, percentage, duration });
         } catch (error) {
             toast.error("Le projet n'a pas pu être chargé");
         }
@@ -222,6 +226,22 @@ const Project = () => {
                     value={project.framework}
                     onChange={handleChange}
                     error={errors.framework}
+                />
+                <Field
+                    name="percentage"
+                    label="Pourcentage"
+                    placeholder="100"
+                    value={project.percentage}
+                    onChange={handleChange}
+                    error={errors.percentage}
+                />
+                <Field
+                    name="duration"
+                    label="Durée de la vidéo"
+                    placeholder="0m39"
+                    value={project.duration}
+                    onChange={handleChange}
+                    error={errors.duration}
                 />
 
                 <Datetime

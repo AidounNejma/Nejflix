@@ -56,6 +56,7 @@ $white: #ffffff;
     margin: auto;
     min-height: 100vh;
 }
+
 .modal.closed {
     display: none;
 }
@@ -81,6 +82,18 @@ $white: #ffffff;
     opacity: 1;
     height: 26rem;
 }
+
+.modal .modal-header .wrapperVideoThumbnail{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+    transition: opacity 0.9s;
+}
+
+
 
 .modal .modal-header .close {
     display: flex;

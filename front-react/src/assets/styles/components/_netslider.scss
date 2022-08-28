@@ -41,7 +41,7 @@ $duration: 250ms;
                 color: #fff;
                 font-size: 1.4rem;
                 text-shadow: 2px 2px 4px #000000;
-                width: 300px;
+                width: 100%;
                 margin: 0;
                 padding: 0;
             }
@@ -61,10 +61,11 @@ $duration: 250ms;
                 font: inherit;
                 cursor: pointer;
                 outline: inherit;
+                width: 100%;
 
                 .thumbnailSwiper{
                     border-radius: 4px;
-                    width: 300px;
+                    width: 100%;
                     height: 200px;
                     background-size: cover !important;
                     background-position: center !important;
