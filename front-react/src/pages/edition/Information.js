@@ -9,68 +9,58 @@ import Footer from '../../components/Footer';
 import Field from '../../components/forms/Field';
 import File from '../../components/forms/File';
 import Textarea from '../../components/forms/Textarea';
-import Datetime from '../../components/forms/Datetimes';
 
-import EducationApi from '../../services/EducationApi';
+import InformationApi from '../../services/InformationApi';
 import axios from '../../interceptors/axios';
 
 
-const Education = () => {
+const Information = () => {
     //Récupération de l'id dans l'URL
     const params = useParams();
 
-    //Initialisation de la variable id avec "creation"
-    var id = 'creation';
-    var title = 'Créer une formation';
+    var id = params.informationsId;
     
-    //S'il y a un id dans l'url, c'est une edition
-    if(params.educationId){
-        id = params.educationId;
-        title = "Editer une formation"
-    }
-
     // Constantes pour les fichiers 
     const [selectedFile, setSelectedFile] = useState();
 	const [isFilePicked, setIsFilePicked] = useState(false);
 
-    //Constantes pour les inputs du projet (initialisés vides)
-    const [education, setEducation] = useState({
+    //Constantes pour les inputs des information (initialisés vides)
+    const [informations, setInformations] = useState({
         name: "",
-        description: "",
-        language: "",
-        company: "",
-        framework: "",
-        dateOfCreation:"",
-        thumbnail: "",
-        video: "",
-        percentage: "",
-        duration: ""
+        age: "",
+        nationality: "",
+        drivingLicence: "",
+        number: "",
+        address:"",
+        city: "",
+        zipCode: "",
+        country: "",
+        biography: "",
+        video: ""
     });
 
     //Contantes pour les erreurs (initialisées vides)
     const [errors, setErrors] = useState({
         name: "",
-        description: "",
-        language: "",
-        company: "",
-        framework: "",
-        dateOfCreation:"",
-        thumbnail: "",
-        video: "",
-        percentage: "",
-        duration: ""
+        age: "",
+        nationality: "",
+        drivingLicence: "",
+        number: "",
+        address:"",
+        city: "",
+        zipCode: "",
+        country: "",
+        biography: "",
+        video: ""
     });
 
-    //Constante pour l'édition
-    const [editing, setEditing] = useState(false);
-
     // Récupération de la formation en fonction de l'identifiant
-    const fetchEducation = async id => {
+    const fetchInformations = async id => {
         try {
-            const { name, description, language, company, framework, dateOfCreation, percentage, duration } = await EducationApi.find(
+            const { name, age, nationality, drivingLicence, number, address, city, zipCode, country, biography, video, thumbnail } = await InformationApi.find(
                 id
             );
-            setEducation({ name, description, language, company, framework, dateOfCreation, percentage, duration });
+            setInformations({ name, age, nationality, drivingLicence, number, address, city, zipCode, country, biography, video, thumbnail });
         } catch (error) {
             toast.error("La formation n'a pas pu être chargée");
         }
@@ -78,21 +68,13 @@ const Education = () => {
 
     // Chargement de la formation si besoin au chargement du composant ou au changement de l'identifiant
     useEffect(() => {
-        if (id !== "creation") {
-            setEditing(true);
-            fetchEducation(id);
-        }
+        fetchInformations(id);
     }, [id]);
 
     // Gestion des changements des inputs dans le formulaire
     const handleChange = ({ currentTarget }) => {
         const { name, value } = currentTarget;
-        setEducation({ ...education, [name]: value });
-    }
-
-    //Gestion des changement de la date
-    const handleDate = (date) => {
-        setEducation({ ...education, 'dateOfCreation' : new Date(date._d) });
+        setInformations({ ...informations, [name]: value });
     }
 
     //Gestion des fichiers Thumbnail
@@ -115,7 +97,7 @@ const Education = () => {
 
             //console.log(response);
             //On insère l'url dans le champ thumbnail de l'entité Education
-            setEducation({ ...education, 'thumbnail' : response.data['@id'] });
+            setInformations({ ...informations, 'thumbnail' : response.data['@id'] });
 
             return response;
         });
@@ -141,7 +123,7 @@ const Education = () => {
 
             //console.log(response);
             //On insère l'url dans le champ video de l'entité Education
-            setEducation({ ...education, 'video' : response.data['@id'] });
+            setInformations({ ...informations, 'video' : response.data['@id'] });
 
             return response;
         });
@@ -153,14 +135,9 @@ const Education = () => {
 
         try {
             setErrors({});
-
-            if (editing) {
-                await EducationApi.update(id, education);
-                toast.success("La formation a bien été modifiée");
-            }else {
-                await EducationApi.create(education);
-                toast.success("La formation a bien été créé");
-            }
+            await InformationApi.update(id, informations);
+            toast.success("Les information ont bien été modifiées");
+            
         } catch ({ response }) {
             const { violations } = response.data;
 
@@ -171,7 +148,7 @@ const Education = () => {
                 });
 
                 setErrors(apiErrors);
-                toast.error("Des erreurs dans votre formulaire !");
+                toast.error("Il y a des erreurs dans votre formulaire !");
             }
         }
     }
@@ -181,85 +158,103 @@ const Education = () => {
             <Navigation />
 
             <form onSubmit={handleSubmit} className="formEditionProject">
-                <h1>{title}</h1>
+                <h1>Edition des informations</h1>
                 <Field
                     name="name"
-                    label="Nom du projet"
-                    placeholder="ShonenJump"
-                    value={education.name}
+                    label="Nom et prénom"
+                    placeholder="Nejma Aidoun"
+                    value={informations.name}
                     onChange={handleChange}
                     error={errors.name}
                 />
 
+                <Field
+                    name="age"
+                    label="Age"
+                    placeholder="27"
+                    value={informations.age}
+                    onChange={handleChange}
+                    error={errors.age}
+                />
+
+                <Field
+                    name="nationality"
+                    label="Nationalité"
+                    placeholder="Française"
+                    value={informations.nationality}
+                    onChange={handleChange}
+                    error={errors.nationality}
+                />
+
+                <Field
+                    name="drivingLicence"
+                    label="Permis de conduire"
+                    placeholder="Permis B"
+                    value={informations.drivingLicence}
+                    onChange={handleChange}
+                    error={errors.drivingLicence}
+                />
+
+                <Field
+                    name="number"
+                    label="Numéro de téléphone"
+                    placeholder="0699396183"
+                    value={informations.number}
+                    onChange={handleChange}
+                    error={errors.number}
+                />
+
+                <Field
+                    name="address"
+                    label="Adresse"
+                    placeholder="31B rue du Faubourd d'Auvergne"
+                    value={informations.address}
+                    onChange={handleChange}
+                    error={errors.address}
+                />
+
+                <Field
+                    name="zipCode"
+                    label="Code Postal"
+                    placeholder="30100"
+                    value={informations.zipCode}
+                    onChange={handleChange}
+                    error={errors.zipCode}
+                />
+
+                <Field
+                    name="city"
+                    label="Ville"
+                    placeholder="Alès"
+                    value={informations.city}
+                    onChange={handleChange}
+                    error={errors.city}
+                />
+
+                <Field
+                    name="country"
+                    label="Pays"
+                    placeholder="France"
+                    value={informations.country}
+                    onChange={handleChange}
+                    error={errors.country}
+                />
+
                 <Textarea
-                    name="description"
-                    label="Description"
-                    placeholder="Je vous présente..."
-                    value={education.description}
+                    name="biography"
+                    label="Biographie"
+                    placeholder="Salut, moi c'est Nejma..."
+                    value={informations.biography}
                     onChange={handleChange}
-                    error={errors.description}
+                    error={errors.biography}
                     type='textarea'
-                />
-
-                <Field
-                    name="company"
-                    label="Entreprise"
-                    placeholder="ex: Biyn Media"
-                    value={education.company}
-                    onChange={handleChange}
-                    error={errors.company}
-                />
-
-                <Field
-                    name="language"
-                    label="Langages"
-                    placeholder="ex: PHP, Javascript"
-                    value={education.language}
-                    onChange={handleChange}
-                    error={errors.language}
-                />
-
-                <Field
-                    name="framework"
-                    label="Frameworks"
-                    placeholder="ex: Symfony, ReactJs"
-                    value={education.framework}
-                    onChange={handleChange}
-                    error={errors.framework}
-                />
-
-                <Field
-                    name="percentage"
-                    label="Pourcentage"
-                    placeholder="100"
-                    value={education.percentage}
-                    onChange={handleChange}
-                    error={errors.percentage}
-                />
-
-                <Field
-                    name="duration"
-                    label="Durée de la vidéo"
-                    placeholder="0m39"
-                    value={education.duration}
-                    onChange={handleChange}
-                    error={errors.duration}
-                />
-
-                <label htmlFor="dateOfCreation" className='labelForInputsForm'>Date de création</label>
-                <Datetime
-                    name="dateOfCreation"
-                    label="Date de création"
-                    value={new Date(education.dateOfCreation)}
-                    onChange={handleDate}
-                    error={errors.dateOfCreation}
                 />
 
                 <label htmlFor="thumbnail" className='labelForInputsForm'>Vignette</label>
                 <File
                     name="thumbnail"
                     label="Vignette"
-                    className="formProject-Thumbnail"
+                    className="formInformation-Thumbnail"
                     onChange={handleThumbnail}
                     error=''
                 />
@@ -267,7 +262,7 @@ const Education = () => {
                 <File
                     name="video"
                     label="Vidéo"
-                    className="formProject-Thumbnail"
+                    className="formInformation-Video"
                     onChange={handleVideo}
                     error=''
                 />
@@ -276,8 +271,8 @@ const Education = () => {
                     <button type="submit" className="submitEditProject">
                         Enregistrer
                     </button>
-                    <Link to="/toutes-les-formations" className="btnReturnToProjects">
-                        Retour à la liste
+                    <Link to="/tableau-de-bord" className="btnReturnToProjects">
+                        Retour au tableau de bord
                     </Link>
                 </div>
 
@@ -288,4 +283,4 @@ const Education = () => {
     );
 };
 
-export default Education;
+export default Information;

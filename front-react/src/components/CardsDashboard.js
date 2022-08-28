@@ -34,12 +34,12 @@ const CardsDashboard = () => {
                 <h3>Mes formations</h3>
             </a>
 
-            <a href="/" className="panelCards" >
+            <a href="/edition-informations/1" className="panelCards" >
                 <h3>Mes informations personnelles</h3>
             </a>
 
             <a href="/" className="panelCards">
-                <h3>Mes demandes de contact</h3>
+                <h3>Mes compétences</h3>
             </a>
 
         </div>

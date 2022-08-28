@@ -248,6 +248,7 @@ const Experience = () => {
                     error={errors.duration}
                 />
 
+                <label htmlFor="dateOfCreation" className='labelForInputsForm'>Date de création</label>
                 <Datetime
                     name="dateOfCreation"
                     label="Date de création"
@@ -256,6 +257,7 @@ const Experience = () => {
                     error={errors.dateOfCreation}
                 />
 
+                <label htmlFor="thumbnail" className='labelForInputsForm'>Vignette</label>
                 <File
                     name="thumbnail"
                     label="Vignette"
@@ -264,9 +266,10 @@ const Experience = () => {
                     error=''
                 />
 
+                <label htmlFor="video" className='labelForInputsForm'>Vidéo</label>
                 <File
                     name="video"
-                    label="video"
+                    label="Vidéo"
                     className="formProject-Thumbnail"
                     onChange={handleVideo}
                     error=''

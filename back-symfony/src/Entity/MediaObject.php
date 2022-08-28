@@ -86,6 +86,12 @@ class MediaObject
     #[ORM\OneToMany(mappedBy: 'video', targetEntity: Experience::class)]
     private Collection $experiencesVideo;
 
+    #[ORM\OneToMany(mappedBy: 'video', targetEntity: Informations::class)]
+    private Collection $informationsVideo;
+
+    #[ORM\OneToMany(mappedBy: 'thumbnail', targetEntity: Informations::class)]
+    private Collection $informationsThumbnail;
+
     public function __construct()
     {
         $this->thumbnailProjects = new ArrayCollection();
@@ -94,6 +100,8 @@ class MediaObject
         $this->projectsVideo = new ArrayCollection();
         $this->educationVideo = new ArrayCollection();
         $this->experiencesVideo = new ArrayCollection();
+        $this->informationsVideo = new ArrayCollection();
+        $this->informationsThumbnail = new ArrayCollection();
     }
 
     
@@ -276,6 +284,66 @@ class MediaObject
             // set the owning side to null (unless already changed)
             if ($experiencesVideo->getVideo() === $this) {
                 $experiencesVideo->setVideo(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Informations>
+     */
+    public function getInformationsVideo(): Collection
+    {
+        return $this->informationsVideo;
+    }
+
+    public function addInformationsVideo(Informations $informationsVideo): self
+    {
+        if (!$this->informationsVideo->contains($informationsVideo)) {
+            $this->informationsVideo->add($informationsVideo);
+            $informationsVideo->setVideo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInformationsVideo(Informations $informationsVideo): self
+    {
+        if ($this->informationsVideo->removeElement($informationsVideo)) {
+            // set the owning side to null (unless already changed)
+            if ($informationsVideo->getVideo() === $this) {
+                $informationsVideo->setVideo(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Informations>
+     */
+    public function getInformationsThumbnail(): Collection
+    {
+        return $this->informationsThumbnail;
+    }
+
+    public function addInformationsThumbnail(Informations $informationsThumbnail): self
+    {
+        if (!$this->informationsThumbnail->contains($informationsThumbnail)) {
+            $this->informationsThumbnail->add($informationsThumbnail);
+            $informationsThumbnail->setThumbnail($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInformationsThumbnail(Informations $informationsThumbnail): self
+    {
+        if ($this->informationsThumbnail->removeElement($informationsThumbnail)) {
+            // set the owning side to null (unless already changed)
+            if ($informationsThumbnail->getThumbnail() === $this) {
+                $informationsThumbnail->setThumbnail(null);
             }
         }
 

@@ -243,7 +243,8 @@ const Project = () => {
                     onChange={handleChange}
                     error={errors.duration}
                 />
-
+                
+                <label htmlFor="dateOfCreation" className='labelForInputsForm'>Date de création</label>
                 <Datetime
                     name="dateOfCreation"
                     label="Date de création"
@@ -252,6 +253,7 @@ const Project = () => {
                     error={errors.dateOfCreation}
                 />
 
+                <label htmlFor="thumbnail" className='labelForInputsForm'>Vignette</label>
                 <File
                     name="thumbnail"
                     label="Vignette"
@@ -260,9 +262,10 @@ const Project = () => {
                     error=''
                 />
 
+                <label htmlFor="video" className='labelForInputsForm'>Vidéo</label>
                 <File
                     name="video"
-                    label="video"
+                    label="Vidéo"
                     className="formProject-Thumbnail"
                     onChange={handleVideo}
                     error=''

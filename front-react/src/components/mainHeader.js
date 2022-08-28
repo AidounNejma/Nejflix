@@ -1,10 +1,17 @@
-import React, {useState } from 'react';
+import React from 'react';
 import '../assets/styles/components/_mainHeader.scss';
-import img from '.././assets/img/IMG_3314.png'
-const mainHeader = () => {
+import img from '.././assets/img/IMG_3314.png';
+
+const mainHeader = ({elements, setElements, openModalHeader}) => {
+
+    const handleOpenModalHeader = (id) => {
+        setElements(elements.find(x => x.id === id));
+        openModalHeader(true);
+    };
 
     return (
         <div>
+            {elements.map(information=> (
             <div className='lolomo is-fullbleed'>
                 <div className='billboard-row'>
                     <div className='billboard'>
@@ -57,7 +64,12 @@ const mainHeader = () => {
                                             <span className="ltr-zd4xih">Lecture</span>
                                         </button>
                                     </a>
-                                    <button className="color-secondary hasLabel hasIcon" data-uia="billboard-more-info" type="button">
+                                    <button 
+                                        className="color-secondary hasLabel hasIcon" 
+                                        data-uia="billboard-more-info" 
+                                        type="button" 
+                                        key={information.id} 
+                                        onClick={()=> handleOpenModalHeader(information.id)}>
                                         <div className="ltr-1ksxkn9">
                                             <div className="medium ltr-18dhnor" role="presentation">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="Hawkins-Icon Hawkins-Icon-Standard">
@@ -94,6 +106,7 @@ const mainHeader = () => {
                 </span>
 
             </div>
+            ))};
         </div>
     );
 };

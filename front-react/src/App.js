@@ -14,7 +14,9 @@ import Experiences from './pages/Experiences';
 import Experience from './pages/edition/Experience';
 import Educations from './pages/Educations';
 import Education from './pages/edition/Education';
+import Information from './pages/edition/Information';
 import ContactMe from './pages/ContactMe';
+
 
 
 const App = () => {
@@ -110,6 +112,14 @@ const App = () => {
                                 element={
                                     <PrivateRoute>
                                         <Education/>
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route 
+                                path="edition-informations/:informationsId" 
+                                element={
+                                    <PrivateRoute>
+                                        <Information/>
                                     </PrivateRoute>
                                 }
                             />
