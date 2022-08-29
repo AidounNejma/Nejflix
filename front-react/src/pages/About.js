@@ -8,6 +8,8 @@ import axios from 'axios';
 import NejflixModal from '../components/NejflixModal';
 import { API_URL } from '../config';
 import ModalMainHeader from '../components/ModalMainHeader';
+import LoadingScreen from '../components/LoadingScreen';
+import VideoPlayer from '../components/VideoPlayer';
 
 const About = () => {
 
@@ -19,6 +21,11 @@ const About = () => {
     const [experiences, setExperiences] = useState([]);
     const [educations, setEducations] = useState([]);
     const [informations, setInformations] = useState([]);
+
+    const [getVideo, setGetVideo] = useState([]);
+    const [showVideo, setShowVideo] = useState(false);
+
+    const [loading, setLoading] = useState(false);
 
     let apiUrls = [
         API_URL + 'projects',
@@ -35,6 +42,7 @@ const About = () => {
                 setExperiences(experiences['hydra:member']);
                 setEducations(education['hydra:member']);
                 setInformations(informations['hydra:member']);
+                setLoading(true);
             })
         );
     }, []);
@@ -44,13 +52,25 @@ const About = () => {
         <div>
             <Navigation />
 
-            <MainHeader elements={informations} element={element} openModalHeader={setShowModalHeader} setElements={setElements} />
-            <ModalMainHeader openedModalHeader={showModalHeader} setIsOpendModalHeader={setShowModalHeader} element={element}/>
-
-            <NetSlider elements={projects} element={element} openModal={setShow} setElements={setElements} title="Mes projets"/>
-            <NetSlider elements={experiences} element={element} openModal={setShow} setElements={setElements} title="Mes expériences"/>
-            <NetSlider elements={educations} element={element} openModal={setShow} setElements={setElements} title="Mes formations"/>
-            <NejflixModal opened={show} setIsOpened={setShow} element={element} />
+            {loading ? 
+                (
+                    <div>
+                        <MainHeader elements={informations} element={element} openModalHeader={setShowModalHeader} setElements={setElements} setGetVideo={setGetVideo} setShowVideo={setShowVideo} />
+                        <ModalMainHeader openedModalHeader={showModalHeader} setIsOpendModalHeader={setShowModalHeader} element={element} setGetVideo={setGetVideo} setShowVideo={setShowVideo}/>
+            
+                        <NetSlider elements={projects} element={element} openModal={setShow} setElements={setElements} title="Mes projets"/>
+                        <NetSlider elements={experiences} element={element} openModal={setShow} setElements={setElements} title="Mes expériences"/>
+                        <NetSlider elements={educations} element={element} openModal={setShow} setElements={setElements} title="Mes formations"/>
+                        
+                        <NejflixModal opened={show} setIsOpened={setShow} element={element} setGetVideo={setGetVideo} setShowVideo={setShowVideo} />
+                        <VideoPlayer video={getVideo} showVideo={showVideo} setShowVideo={setShowVideo} />
+                    </div>
+                ) : 
+                (
+                    <LoadingScreen/>
+                )
+            }
+            
 
             <Footer />
         </div>

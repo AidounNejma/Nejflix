@@ -13,6 +13,7 @@ const Netslider = ({elements, setElements, openModal, title}) => {
     const handleOpen = (id) => {
         setElements(elements.find(x => x.id === id));
         openModal(true);
+
     };
 
     return (

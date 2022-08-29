@@ -94,11 +94,10 @@ $white: #ffffff;
     position: absolute;
     background-repeat: no-repeat !important;
     background-size: cover !important;
-    background-position: center !important;
+    background-position: 0% 10% !important;
     transition: opacity 0.9s;
+    border-radius: 6px 6px 0 0;
 }
-
-
 
 .modal .modal-header .close {
     display: flex;

@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 
 /* Cores */
-
 $background: #141414;
 $modal: #181818;
 $white: #ffffff;
@@ -13,6 +12,26 @@ $white: #ffffff;
     align-items: center;
     color: #ffffff;
     background-color: $background;
+
+    &.one {
+        transform:scaleY(.01) scaleX(0);
+        animation:unfoldIn 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+        .modal-background {
+            .modal {
+                transform:scale(0);
+                animation: zoomIn .5s .8s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+            }
+        }
+        &.out {
+            transform:scale(1);
+            animation:unfoldOut 1s .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+            .modal-background {
+            .modal {
+                animation: zoomOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+            }
+            }
+        }
+    }
 }
 
 #wrapperModal>button {
@@ -91,6 +110,7 @@ $white: #ffffff;
     background-size: cover !important;
     background-position: center !important;
     transition: opacity 0.9s;
+    border-radius: 6px 6px 0 0;
 }
 
 
@@ -309,6 +329,30 @@ $white: #ffffff;
 
 .visuallyhidden {
     opacity: 0;
+}
+
+@keyframes unfoldIn {
+    0% {
+        transform:scaleY(.005) scaleX(0);
+    }
+    50% {
+        transform:scaleY(.005) scaleX(1);
+    }
+    100% {
+        transform:scaleY(1) scaleX(1);
+    }
+}
+
+@keyframes unfoldOut {
+    0% {
+        transform:scaleY(1) scaleX(1);
+    }
+    50% {
+        transform:scaleY(.005) scaleX(1);
+    }
+    100% {
+        transform:scaleY(.005) scaleX(0);
+    }
 }
 
 @media screen and (min-width: 1080px) {}
