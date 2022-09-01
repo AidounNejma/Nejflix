@@ -52,6 +52,9 @@ class Projects
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $duration = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $github = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -173,6 +176,18 @@ class Projects
     public function setDuration(?string $duration): self
     {
         $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getGithub(): ?string
+    {
+        return $this->github;
+    }
+
+    public function setGithub(?string $github): self
+    {
+        $this->github = $github;
 
         return $this;
     }

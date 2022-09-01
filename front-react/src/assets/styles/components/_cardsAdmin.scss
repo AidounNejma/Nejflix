@@ -147,8 +147,9 @@ h1 {
 .example-1 {
     .wrapper {
         background-repeat: no-repeat;
-        background-size: cover;
+        background-size: contain;
         border-radius: 5px;
+        background-position: center;
     }
 
     .date {
