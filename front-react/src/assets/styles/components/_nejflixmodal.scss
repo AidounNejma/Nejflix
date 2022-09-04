@@ -54,7 +54,6 @@ $white: #ffffff;
         display: flex;
         flex-direction: column;
         width: 870px;
-        margin: 20px 20px;
         border-radius: 6px;
         z-index: 1;
         background-color: $modal;
@@ -63,7 +62,6 @@ $white: #ffffff;
         position: absolute;
         top: 10%;
         margin: auto;
-        min-height: 100vh;
 
         &.one {
             transform:scaleY(.01) scaleX(0);
@@ -261,6 +259,15 @@ $white: #ffffff;
                         width: 30px;
                     }
 
+                    .informations-about-video{
+                        display: flex;
+                        align-items: center;
+
+                        span{
+                            color: #fff ;
+                        }
+                    }
+
                     .description-badge {
                         display: flex;
                         justify-content: center;
@@ -369,23 +376,42 @@ $white: #ffffff;
 
 @media screen and (max-width: 1280px) {}
 
+@media screen and (max-width: 867px) {
+    .wrapperModal {
+        .modal.one {
+            width: -webkit-fill-available;
+            height: max-content;
+            top: 8%;
+        }
+    }
+}
+
 @media screen and (max-width: 768px) {
-    .modal{
-        .modal-header{
-            .header-content{
-                margin-bottom: 40px;
-                .header-title{
-                    .header-buttons{
-                        .add, .rate, .volume{
-                            width: 32px;
-                            height: 32px;
+    .wrapperModal {
+        .modal{
+            .modal-header{
+                .header-content{
+                    margin-bottom: 40px;
+                    padding: 0 15px !important;
+
+                    .header-title{
+                        .header-buttons{
+                            button.add, button.rate, button.volume{
+                                padding-left: 0.5rem;
+                                padding-right: 0.5rem;
+                            }
                         }
-                        .play {
-                            height: 32px;
-                            font-size: 1.2rem;
-                            padding-left: 1.5rem;
-                            padding-right: 2rem;
-                        }
+                    }
+                }
+            }
+
+            .modal-body{
+                grid-template-columns: 1fr !important;
+                .modal-content-first{
+                    padding-right: 0px;
+                    .modal-description{
+                        align-items: flex-start;
+                        flex-direction: column;
                     }
                 }
             }
@@ -394,12 +420,14 @@ $white: #ffffff;
 }
 
 @media screen and (max-width: 688px) {
-    .modal{
-        .modal-body{
-            grid-template-columns: 1fr;
-            row-gap: 30px;
-            .modal-content-second{
-                grid-row: 2;
+    .wrapperModal {
+        .modal{
+            .modal-body{
+                grid-template-columns: 1fr;
+                row-gap: 30px;
+                .modal-content-second{
+                    grid-row: 2;
+                }
             }
         }
     }

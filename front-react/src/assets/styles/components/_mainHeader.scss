@@ -318,3 +318,66 @@
     }
 
 }
+
+@media screen and (max-width: 1080px) {
+    .lolomo {
+        .billboard-row {
+            .billboard {
+                .info{
+                    bottom: 25%;
+                    .logo-and-text{
+                        .titleWrapper{
+                            .billboard-title{
+                                .title-logo {
+                                    font-size: 2rem;
+                                }
+                            }
+                        }
+                    }   
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .lolomo {
+        .billboard-row {
+            .billboard {
+                .info{
+                    bottom: 15%;
+                    .logo-and-text{
+                        .titleWrapper{
+                            .billboard-title{
+                                .title-logo {
+                                    font-size: 1.5rem;
+                                }
+                            }
+                        }
+                    }   
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 688px) {
+    .lolomo {
+        .billboard-row {
+            .billboard {
+                .info{
+                    width: 50%;
+                    .logo-and-text{
+                        .titleWrapper{
+                            .billboard-title{
+                                .title-logo {
+                                    font-size: 1.5rem;
+                                }
+                            }
+                        }
+                    }   
+                }
+            }
+        }
+    }
+}

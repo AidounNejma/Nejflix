@@ -126,3 +126,21 @@
     }
 }
 
+@media screen and (max-width: 867px) {
+    .formContactContainer{
+        flex-direction: column;
+
+        .formContact, .debug{
+            margin: 20px auto;
+        }
+    }
+}
+
+@media screen and (max-width: 688px) {
+    .formContactContainer{
+
+        .debug{
+            display: none;
+        }
+    }
+}

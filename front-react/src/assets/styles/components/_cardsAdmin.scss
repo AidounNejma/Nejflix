@@ -262,3 +262,19 @@ h1 {
         }
     }
 }
+
+@media screen and (max-width: 867px) {
+    .cardAdmin {
+        width: 50%;
+    }
+    .containerLinkCreate{
+        margin-right: 4%;
+    }
+}
+
+@media screen and (max-width: 587px) {
+
+    .cardAdmin {
+        width: 100%;
+    }
+}
