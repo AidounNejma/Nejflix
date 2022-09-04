@@ -85,11 +85,11 @@ const ModalMainHeader = ({openedModalHeader, setIsOpendModalHeader, element, set
 
     return (
 
-        <div id="wrapperModalMainHeader">
+        <div className={`wrapperModalMainHeader ${openedModalHeader ? '' : 'closed'}`}>
 
-            <div className={`modal ${openedModalHeader ? '' : 'closed'}`}>
+            <div className={`modal ${openedModalHeader ? 'one' : 'out'}`}>
                 <div className="modal-header">
-                    <div className='wrapperVideoThumbnail' style={{background: `url(${thumb})`, opacity: showThumb}}>
+                    <div className='wrapperVideoThumbnail' style={{background: `linear-gradient(rgba(20, 20, 20, 0) 0%, rgb(20, 20, 20) 100%), url(${thumb})`, opacity: showThumb}}>
                     </div>
                     <video ref={vidRef} autoPlay muted={muted} src={video} poster={thumb} onEnded={showThumbnail}>
                     </video>

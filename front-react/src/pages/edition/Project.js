@@ -44,7 +44,8 @@ const Project = () => {
         thumbnail: "",
         video: "",
         percentage: "",
-        duration: ""
+        duration: "",
+        github: ""
     });
 
     //Contantes pour les erreurs (initialisées vides)
@@ -58,7 +59,8 @@ const Project = () => {
         thumbnail: "",
         video: "",
         percentage:"",
-        duration: ""
+        duration: "",
+        github: ""
     });
 
     //Constante pour l'édition
@@ -67,10 +69,10 @@ const Project = () => {
     // Récupération du projet en fonction de l'identifiant
     const fetchProject = async id => {
         try {
-            const { name, description, language, company, framework, dateOfCreation, percentage, duration } = await ProjectApi.find(
+            const { name, description, language, company, framework, dateOfCreation, percentage, duration, github } = await ProjectApi.find(
                 id
             );
-            setProject({ name, description, language, company, framework, dateOfCreation, percentage, duration });
+            setProject({ name, description, language, company, framework, dateOfCreation, percentage, duration, github });
         } catch (error) {
             toast.error("Le projet n'a pas pu être chargé");
         }
@@ -231,6 +233,14 @@ const Project = () => {
                     name="percentage"
                     label="Pourcentage"
                     placeholder="100"
+                    value={project.github}
+                    onChange={handleChange}
+                    error={errors.github}
+                />
+                <Field
+                    name="github"
+                    label="Github"
+                    placeholder="https://github.com/AidounNejma/mon-projet"
                     value={project.percentage}
                     onChange={handleChange}
                     error={errors.percentage}

@@ -25,7 +25,6 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
     const [thumb, setThumb] = useState('');
     const [video, setVideo] = useState('');
 
-
     /* ---------------------------------------------------- */
 
     //Gestion du volume
@@ -88,9 +87,9 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
 
     return (
 
-        <div id="wrapperModal" >
+        <div className={`wrapperModal ${opened ? '' : 'closed'}`}>
 
-            <div className={`modal one ${opened ? '' : 'closed'}`} >
+            <div className={`modal ${opened ? 'one' : 'out'}`} >
                 <div className="modal-header">
                     <div className='wrapperVideoThumbnail' style={{background: `linear-gradient(rgba(20, 20, 20, 0) 0%, rgb(20, 20, 20) 100%), url(${thumb})`, opacity: showThumb}}>
                     </div>
@@ -169,6 +168,7 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
                     </div>
 
                     <div className="modal-content-second">
+                        
                         <div className="cast">
                             <span className="title">Entreprise: </span>
                             <span className="sub-title">{element.company} </span>
@@ -183,6 +183,18 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
                             <span className="title">Langage: </span>
                             <span className="sub-title">{element.language} </span>
                         </div>
+                        
+                        {
+                            element['@type'] == 'Projects' ?
+                            <>
+                                <div className="show">
+                                    <span className="title">Github: </span>
+                                    <span className="sub-title"><a href={element.github}>c'est par ici</a></span>
+                                </div>
+                            </>
+                            :
+                            <></>
+                        }
                     </div>
                 </div>
             </div>

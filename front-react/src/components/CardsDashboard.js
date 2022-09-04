@@ -38,9 +38,9 @@ const CardsDashboard = () => {
                 <h3>Mes informations personnelles</h3>
             </a>
 
-            <a href="/" className="panelCards">
+            {/* <a href="/" className="panelCards">
                 <h3>Mes compétences</h3>
-            </a>
+            </a> */}
 
         </div>
     );

@@ -27,8 +27,8 @@ $border_radius: 5px;
             font-size: 12px;
             padding-right: 30px;
 
-            &:hover{
-                color: $font_color !important;
+            &:hover path{
+                fill: $font_color !important;
                 transition: 0.5s;
             }
         }
