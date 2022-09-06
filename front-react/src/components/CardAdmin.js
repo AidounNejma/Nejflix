@@ -115,7 +115,7 @@ const CardAdmin = ({element}) => {
     }
 
     return (
-        <div className="example-1 cardAdmin">
+        <div className="cardAdmin">
             <div className="wrapper" style={{backgroundImage: `url(${BASE_URL + thumb.path})`}}>
                 <div className="date">
                     <span className="day">{new Date(element.dateOfCreation).getDay()}</span>
