@@ -72,7 +72,15 @@ const Experience = () => {
             );
             setExperience({ name, description, language, company, framework, dateOfCreation, percentage, duration });
         } catch (error) {
-            toast.error("Le projet n'a pas pu être chargé");
+            toast.error('😩 Oh, l\'expérience n\'a pas pu être chargée', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
     };
 
@@ -158,10 +166,26 @@ const Experience = () => {
 
             if (editing) {
                 await ExperienceApi.update(id, experience);
-                toast.success("Le client a bien été modifié");
+                toast.success('🥳 L\'expérience a bien été modifiée !', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }else {
                 await ExperienceApi.create(experience);
-                toast.success("Le client a bien été créé");
+                toast.success('🥳 L\'expérience client a bien été créé !', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
         } catch ({ response }) {
             const { violations } = response.data;
@@ -173,7 +197,15 @@ const Experience = () => {
                 });
 
                 setErrors(apiErrors);
-                toast.error("Des erreurs dans votre formulaire !");
+                toast.error('😩 Oh il semblerait qu\'il y a des erreurs dans votre formulaire.', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
         }
     }

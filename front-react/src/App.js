@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AuthApi from './services/AuthApi';
+
 import About from "./pages/About";
 import Home from "./pages/Home";
 import LogIn from "./pages/LogIn";
@@ -17,6 +18,9 @@ import Education from './pages/edition/Education';
 import Information from './pages/edition/Information';
 import ContactMe from './pages/ContactMe';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const App = () => {
@@ -29,6 +33,7 @@ const App = () => {
             setIsAuthenticated
         }}>
                 <main className="container mt-5">
+                    <ToastContainer position={toast.POSITION.TOP_CENTER} />
                     <Routes>
                         <Route element={<AnimatedRoute />}>
                             <Route path="/" element={ <Home/> }/> 

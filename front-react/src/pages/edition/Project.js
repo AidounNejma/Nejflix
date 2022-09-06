@@ -74,7 +74,15 @@ const Project = () => {
             );
             setProject({ name, description, language, company, framework, dateOfCreation, percentage, duration, github });
         } catch (error) {
-            toast.error("Le projet n'a pas pu être chargé");
+            toast.error('😩 Oh, le projet n\'a pas pu être chargé', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
     };
 
@@ -158,10 +166,26 @@ const Project = () => {
 
             if (editing) {
                 await ProjectApi.update(id, project);
-                toast.success("Le client a bien été modifié");
+                toast.success('🥳 Le projet a bien été modifié !', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }else {
                 await ProjectApi.create(project);
-                toast.success("Le client a bien été créé");
+                toast.success('🥳 Le projet a bien été créé !', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
         } catch ({ response }) {
             const { violations } = response.data;
@@ -173,7 +197,15 @@ const Project = () => {
                 });
 
                 setErrors(apiErrors);
-                toast.error("Des erreurs dans votre formulaire !");
+                toast.error('😩 Oh il semblerait qu\'il y a des erreurs dans votre formulaire.', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
         }
     }

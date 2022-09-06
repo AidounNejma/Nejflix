@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser';
 import { PUBLIC_KEY_EMAILJS, SERVICE_EMAILJS, TEMPLATE_EMAILJS } from '../config';
 import Nav from '../components/Navigation';
 import Footer from '../components/Footer';
+import { toast } from 'react-toastify';
 
 import '../assets/styles/pages/_contactMe.scss'
 
@@ -14,9 +15,27 @@ const ContactMe = () => {
     
         emailjs.sendForm(SERVICE_EMAILJS, TEMPLATE_EMAILJS, form.current, PUBLIC_KEY_EMAILJS)
         .then((result) => {
-            //console.log(result.text);
+            if(result.status === 200){
+                toast.success('🦄 Votre message a bien été envoyé !', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
         }, (error) => {
-            //console.log(error.text);
+            toast.error('😩 Oh il semblerait qu\'il y est eu un problème.', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         });
     };
     
@@ -53,7 +72,7 @@ const ContactMe = () => {
     return (
         <div>
             <Nav/>
-
+        
                 <h1 className='contactMe'>Contactez-moi</h1>
                 <div className='formContactContainer'>
                     <form ref={form} className='formContact' onSubmit={sendEmail}>

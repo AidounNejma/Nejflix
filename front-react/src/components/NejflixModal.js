@@ -89,7 +89,7 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
 
         <div className={`wrapperModal ${opened ? '' : 'closed'}`}>
 
-            <div className={`modal ${opened ? 'one' : 'out'}`} >
+            <div className={`modal ${opened ? 'in' : 'out'}`} >
                 <div className="modal-header">
                     <div className='wrapperVideoThumbnail' style={{background: `linear-gradient(rgba(20, 20, 20, 0) 0%, rgb(20, 20, 20) 100%), url(${thumb})`, opacity: showThumb}}>
                     </div>

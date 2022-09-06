@@ -127,7 +127,7 @@ const MediaHeader = ({element, setElements, openModalHeader, setShowVideo, setGe
                                     <div className="synopsis-fade-container">
                                         <div className="synopsis"> 
                                             <div className="ptrack-content" style={{display: showSubtitle}}>
-                                                Afin de poursuivre ses études, la jeune Nejma est à la recherche d'une alternance. Un beau matin, elle part à l'aventure se tenant prête à braver tous les dangers.
+                                                {element.description}
                                             </div> 
                                         </div>
                                     </div>

@@ -62,7 +62,15 @@ const Information = () => {
             );
             setInformations({ name, age, nationality, drivingLicence, number, address, city, zipCode, country, biography, video, thumbnail });
         } catch (error) {
-            toast.error("La formation n'a pas pu être chargée");
+            toast.error('😩 Oh, vos informations n\'ont pas pu être chargées', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
     };
 
@@ -136,7 +144,15 @@ const Information = () => {
         try {
             setErrors({});
             await InformationApi.update(id, informations);
-            toast.success("Les information ont bien été modifiées");
+            toast.success('🥳 Les informations ont bien été modifiées !', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             
         } catch ({ response }) {
             const { violations } = response.data;
@@ -148,7 +164,15 @@ const Information = () => {
                 });
 
                 setErrors(apiErrors);
-                toast.error("Il y a des erreurs dans votre formulaire !");
+                toast.error('😩 Oh il semblerait qu\'il y a des erreurs dans votre formulaire.', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
         }
     }
