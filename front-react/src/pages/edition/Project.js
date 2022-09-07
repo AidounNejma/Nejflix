@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import '../../assets/styles/pages/_project.scss';
 /* import Dropzone from "dropzone"; */
 
-import Navigation from '../../components/Navigation';
+import Navigation from '../../components/Nav';
 import Footer from '../../components/Footer';
 import Field from '../../components/forms/Field';
 import File from '../../components/forms/File';

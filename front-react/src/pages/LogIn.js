@@ -50,6 +50,7 @@ const LogIn = () => {
     return (
         <section className='body'>
             <div className="login-wrapper">
+                
                 <div className="login-header">
                     <a href="/">
                         <img src={Logo} alt="" />
@@ -57,54 +58,52 @@ const LogIn = () => {
                 </div>
 
                 <div className="login">
-            <form className="signin-form" onSubmit={handleSubmit}>
-                <h1 className="title">Connexion</h1>
+                    <form className="signin-form" onSubmit={handleSubmit}>
 
-                <div className="field">
-                    <input 
-                        type="text" 
-                        className="text-input" 
-                        name='username' 
-                        error={error}
-                        autoComplete="off"
-                        onChange={handleChange}
-                        value={credentials.username}
-                        required 
-                    />
-                    <span className="floating-label" htmlFor="username">Adresse email</span>
+                        <h1 className="title">Connexion</h1>
+
+                        <div className="field">
+                            <input 
+                                type="text" 
+                                className="text-input" 
+                                name='username' 
+                                error={error}
+                                autoComplete="off"
+                                onChange={handleChange}
+                                value={credentials.username}
+                                required 
+                            />
+                            <span className="floating-label" htmlFor="username">Adresse email</span>
+                        </div>
+
+                        <div className="field">
+                            <input 
+                                type="password" 
+                                className="text-input" 
+                                name='password' 
+                                onChange={handleChange}
+                                value={credentials.password} 
+                                required
+                            />
+                            <span className="floating-label test" htmlFor="password">Mot de passe</span>
+                        </div>
+
+                        <button className="signin-btn">Se connecter</button>
+
+                        <div className="action-group">
+                            <label htmlFor="remember-me">
+                                <input type="checkbox" className="checkbox" id="remember-me" />
+                                Se souvenir de moi
+                            </label>
+                            <a href="/">Besoin d'aide?</a>
+                        </div>
+
+                    </form>
                 </div>
-
-                <div className="field">
-                    <input 
-                        type="password" 
-                        className="text-input" 
-                        name='password' 
-                        onChange={handleChange}
-                        value={credentials.password} 
-                        required
-                    />
-                    <span className="floating-label test" htmlFor="password">Mot de passe</span>
-                </div>
-
-                <button className="signin-btn">Se connecter</button>
-
-                <div className="action-group">
-                    <label htmlFor="remember-me">
-                        <input type="checkbox" className="checkbox" id="remember-me" />
-                        Se souvenir de moi
-                    </label>
-                    <a href="/">Besoin d'aide?</a>
-                </div>
-
-                
-            </form>
-        </div>
-
             </div>
 
             <Footer/>
         </section>
-
     );
 };
 

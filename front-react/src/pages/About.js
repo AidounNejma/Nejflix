@@ -1,4 +1,4 @@
-import Navigation from '../components/Navigation';
+import Navigation from '../components/Nav';
 import MainHeader from '../components/MainHeader';
 import NetSlider from '../components/Netslider';
 import Footer from '../components/Footer';

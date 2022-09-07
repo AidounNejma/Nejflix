@@ -8,7 +8,7 @@ import NejmaLogo from '../assets/img/iconNejmaAccount.png';
 import InviteLogo from '../assets/img/iconInviteAccount.png';
 
 const Nav = () => {
-    
+
     /* Gestion de la navbar au scroll */
     const [navColor, setnavColor] = useState("transparent");
     
@@ -34,7 +34,6 @@ const Nav = () => {
         setIsAuthenticated(false);
         navigate(to, { replace: true });
     }
-
     
     return (
         <div className="pinning-header">
@@ -68,7 +67,35 @@ const Nav = () => {
                         </li>
                         </>
                     }
-                        
+                        <li className="navigation-tab">
+                            <a className="menu-trigger" role="button" tabIndex="0">Parcourir</a>
+                                <div role="menu" className="sub-menu theme-lakira">
+                                    <div className="callout-arrow"></div>
+                                    <div className="topbar"></div>
+                                    <ul className="sub-menu-list"> 
+                                        <li className="sub-menu-item" role="none">
+                                            <NavLink to="/" className="current active">
+                                                Accueil
+                                            </NavLink>
+                                        </li>
+                                        <li className="sub-menu-item" role="none">
+                                            <NavLink to="/a-propos">
+                                                A propos
+                                            </NavLink>
+                                        </li>
+                                        {
+                                            isAuthenticated &&
+                                            <>
+                                            <li className="sub-menu-item">
+                                                <NavLink to="/tableau-de-bord">
+                                                    Tableau de bord
+                                                </NavLink>
+                                            </li>
+                                            </>
+                                        }
+                                    </ul>
+                                </div>
+                        </li>
                     </ul>
                     
                     <div className="secondary-navigation">
@@ -110,8 +137,18 @@ const Nav = () => {
                                             <img className="profile-icon" src={NejmaLogo} alt=""/>
                                         </span>
                                     </a>
-                                    <span className="caret" role="presentation" onClick={handleLogout}>
+                                    <span className="caret" role="presentation" >
                                     </span>
+                                    <div role="menu" tabIndex="0" className="account-drop-down sub-menu theme-lakira">
+                                        <div className="topbar"></div>
+                                        <ul className="sub-menu-list sign-out-links">
+                                            <li className="sub-menu-item">
+                                                <a className="sub-menu-link " href="#" onClick={handleLogout}>Se déconnecter</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    
                                     
                                     
                                     </>

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { PUBLIC_KEY_EMAILJS, SERVICE_EMAILJS, TEMPLATE_EMAILJS } from '../config';
-import Nav from '../components/Navigation';
+import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import { toast } from 'react-toastify';
 

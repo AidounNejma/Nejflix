@@ -3,7 +3,7 @@ import axios from "../interceptors/axios";
 import {useEffect, useState} from "react";
 
 import Footer from '../components/Footer';
-import Navigation from '../components/Navigation';
+import Navigation from '../components/Nav';
 import CardsDashboard from '../components/CardsDashboard';
 
 import '../assets/styles/pages/_dashboard.scss';
