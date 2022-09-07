@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import '../../css/components/_modalMainHeader.scss'
 import { BASE_URL } from '../config';
 import Unavailable from '../../img/content-unavailable.jpeg';
@@ -68,7 +67,7 @@ const ModalMainHeader = ({openedModalHeader, setIsOpendModalHeader, element, set
 
         <div className={`wrapperModalMainHeader ${openedModalHeader ? '' : 'closed'}`}>
 
-            <div className={`modal ${openedModalHeader ? 'in' : 'out'}`}>
+            <div className={`modal ${openedModalHeader ? 'in' : ''}`}>
                 <div className="modal-header">
                     {
                             element.thumbnail == null ?

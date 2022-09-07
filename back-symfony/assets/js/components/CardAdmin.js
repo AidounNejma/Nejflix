@@ -1,25 +1,15 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import {BASE_URL} from '../config';
 import ProjectApi from '../services/ProjectApi';
 import ExperienceApi from '../services/ExperienceApi';
 import EducationApi from '../services/EducationApi';
+import Unavailable from '../../img/content-unavailable.jpeg';
 
 const CardAdmin = ({element}) => {
-
-    const [thumb, setThumb] = useState([]);
-
-    //Requête pour récupérer l'image de couverture
-    useEffect(() => {
-        axios.get(BASE_URL + element.thumbnail).then( resp => {
-
-            setThumb({'path': resp.data.contentUrl});
-
-        });
-    }, []);
     
+    var thumbnail = '';
     //Initialisation de l'url pour l'édition
     var url = '/edition-du-projet/';
     var name = '';
@@ -98,6 +88,7 @@ const CardAdmin = ({element}) => {
             if (result.isConfirmed) {
 
                 // Suppresion de l'image
+                
 
                 // Suppression de l'élément
                 nameApi.deleteApi(id);
@@ -114,9 +105,16 @@ const CardAdmin = ({element}) => {
         });
     }
 
+    if(element.thumbnail == null){
+        thumbnail = Unavailable;
+    }
+    else{
+        thumbnail = BASE_URL + element.thumbnail.contentUrl;
+    }
+
     return (
         <div className="cardAdmin">
-            <div className="wrapper" style={{backgroundImage: `url(${BASE_URL + thumb.path})`}}>
+            <div className="wrapper" style={{backgroundImage: `url(${thumbnail})`}}>
                 <div className="date">
                     <span className="day">{new Date(element.dateOfCreation).getDay()}</span>
                     <span className="month">{monthNames[new Date(element.dateOfCreation).getMonth()]}</span>

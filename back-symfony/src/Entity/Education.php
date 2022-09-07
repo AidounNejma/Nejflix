@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EducationRepository;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -48,10 +49,14 @@ class Education
 
     #[Groups("education:read")]
     #[ORM\ManyToOne(inversedBy: 'thumbnailEducation')]
+    #[ORM\JoinColumn(nullable: true)]
+    #[ApiProperty(iri: 'https://schema.org/MediaObject')]
     private ?MediaObject $thumbnail = null;
 
     #[Groups("education:read")]
     #[ORM\ManyToOne(inversedBy: 'educationVideo')]
+    #[ORM\JoinColumn(nullable: true)]
+    #[ApiProperty(iri: 'https://schema.org/MediaObject')]
     private ?MediaObject $video = null;
 
     #[Groups("education:read")]

@@ -1,7 +1,5 @@
-import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import '../../css/components/_nejflixmodal.scss'
-import { BASE_URL } from '../config';
 import Unavailable from '../../img/content-unavailable.jpeg';
 
 
@@ -35,7 +33,6 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
         }
     }
 
-    
     /* ---------------------------------------------------- */
 
     //Lorsque la vidéo est terminée (onEnded)
@@ -70,7 +67,7 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
 
         <div className={`wrapperModal ${opened ? '' : 'closed'}`}>
 
-            <div className={`modal ${opened ? 'in' : 'out'}`} >
+            <div className={`modal ${opened ? 'in' : ''}`} >
                 <div className="modal-header">
                     {
                             element.thumbnail == null ?

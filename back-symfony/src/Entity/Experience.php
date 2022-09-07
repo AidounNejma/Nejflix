@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ExperienceRepository;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -48,10 +49,14 @@ class Experience
 
     #[Groups("experience:read")]
     #[ORM\ManyToOne(inversedBy: 'thumbnailExperiences')]
+    #[ORM\JoinColumn(nullable: true)]
+    #[ApiProperty(iri: 'https://schema.org/MediaObject')]
     private ?MediaObject $thumbnail = null;
 
     #[Groups("experience:read")]
     #[ORM\ManyToOne(inversedBy: 'experiencesVideo')]
+    #[ORM\JoinColumn(nullable: true)]
+    #[ApiProperty(iri: 'https://schema.org/MediaObject')]
     private ?MediaObject $video = null;
 
     #[Groups("experience:read")]

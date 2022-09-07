@@ -148,22 +148,22 @@ class MediaObject
         return $this->thumbnailExperiences;
     }
 
-    public function addExperience(Experience $experience): self
+    public function addExperience(Experience $thumbnailExperience): self
     {
-        if (!$this->experiences->contains($experience)) {
-            $this->experiences->add($experience);
-            $experience->setThumbnail($this);
+        if (!$this->thumbnailExperiences->contains($thumbnailExperience)) {
+            $this->thumbnailExperiences->add($thumbnailExperience);
+            $thumbnailExperience->setThumbnail($this);
         }
 
         return $this;
     }
 
-    public function removeExperience(Experience $thumbnailExperiences): self
+    public function removeExperience(Experience $thumbnailExperience): self
     {
-        if ($this->experiences->removeElement($thumbnailExperiences)) {
+        if ($this->thumbnailExperiences->removeElement($thumbnailExperience)) {
             // set the owning side to null (unless already changed)
-            if ($thumbnailExperiences->getThumbnail() === $this) {
-                $thumbnailExperiences->setThumbnail(null);
+            if ($thumbnailExperience->getThumbnail() === $this) {
+                $thumbnailExperience->setThumbnail(null);
             }
         }
 
