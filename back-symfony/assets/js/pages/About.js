@@ -28,6 +28,8 @@ const About = () => {
 
     const [loading, setLoading] = useState(false);
 
+    /* ------------------------------------------------------------------------- */
+    /* Requête Axios  */
     let apiUrls = [
         API_URL + 'projects',
         API_URL + 'experiences',
@@ -44,12 +46,28 @@ const About = () => {
                 setEducations(education['hydra:member']);
                 setInformations(informations['hydra:member']);
                 setLoading(true);
+                
             })
             
         );
     }, []);
 
+    /* ------------------------------------------------------------------------- */
     
+    /* Tri par dates */
+    var arrays = [
+        educations,
+        projects,
+        experiences,
+        informations
+    ]
+    for(let i = 0; i < arrays.length; i++){
+        arrays[i].sort(function(a, b){
+            return new Date(b.dateOfCreation) - new Date(a.dateOfCreation);
+        });
+    }
+
+    /* ------------------------------------------------------------------------- */
 
     return (
         <div>

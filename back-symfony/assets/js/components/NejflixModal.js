@@ -52,7 +52,7 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
 
     //Ouvrir le lecteur video
     const handleVideoPlayer = () => {
-        setGetVideo(video);
+        setGetVideo(element.video.contentUrl);
         setShowVideo(true);
     }
 
