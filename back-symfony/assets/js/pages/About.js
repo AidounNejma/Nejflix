@@ -45,10 +45,12 @@ const About = () => {
                 setInformations(informations['hydra:member']);
                 setLoading(true);
             })
+            
         );
     }, []);
 
     
+
     return (
         <div>
             <Navigation />

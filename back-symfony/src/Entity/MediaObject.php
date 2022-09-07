@@ -21,7 +21,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ORM\Entity]
 #[ApiResource(
     iri: 'https://schema.org/MediaObject',
-    normalizationContext: ['groups' => ['media_object:read']],
     itemOperations: ['get'],
     collectionOperations: [
         'get',
@@ -56,7 +55,7 @@ class MediaObject
     private ?int $id = null;
 
     #[ApiProperty(iri: 'https://schema.org/contentUrl')]
-    #[Groups(['media_object:read'])]
+    #[Groups(['project:read', 'informations:read', 'experience:read', 'education:read'])]
     public ?string $contentUrl = null;
 
     /**
@@ -65,6 +64,7 @@ class MediaObject
     #[Assert\NotNull(groups: ['media_object_create'])]
     public ?File $file = null;
 
+    #[Groups("mediaobject:read")]
     #[ORM\Column(nullable: true)] 
     public ?string $filePath = null;
 

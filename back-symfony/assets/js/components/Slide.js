@@ -4,18 +4,7 @@ import {BASE_URL} from '../config';
 import Unavailable from '../../img/content-unavailable.jpeg';
 
 const Slide = ({element}) => {
-    const [thumb, setThumb] = useState([]);
-
-    //Requête pour récupérer l'image de couverture
-    useEffect(() => {
-        axios.get(BASE_URL + element.thumbnail).then( resp => {
-
-            setThumb({'path': resp.data.contentUrl});
-            return resp.data.contentUrl
-
-        });
-    }, []);
-
+    
     return (
         <button>
             {
@@ -24,7 +13,7 @@ const Slide = ({element}) => {
                     <h1 className="heading">{element.name}</h1>
                 </div>
                 :
-                <div style={{background: 'url('+ BASE_URL + thumb.path +')'}} className='thumbnailSwiper'>
+                <div style={{background: 'url('+ BASE_URL + element.thumbnail.contentUrl +')'}} className='thumbnailSwiper'>
                     <h1 className="heading">{element.name}</h1>
                 </div>
             }

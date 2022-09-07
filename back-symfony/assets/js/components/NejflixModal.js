@@ -22,10 +22,6 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
     const [showThumb, setShowThumb] = useState(0); //Image poster
     const vidRef = useRef(null); //Vidéo
 
-    //Constantes pour les url des vignettes et des vidéos
-    const [thumb, setThumb] = useState('');
-    const [video, setVideo] = useState('');
-
     /* ---------------------------------------------------- */
 
     //Gestion du volume
@@ -38,23 +34,7 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
             setIconMuted(volume0);
         }
     }
-    /* ---------------------------------------------------- */
 
-    //Liens vers l'Api pour les vignettes et les videos concernant l'élément cliqué
-    let endpoints = [
-        BASE_URL + element.thumbnail,
-        BASE_URL + element.video,
-    ];
-
-    //Requête pour récupérer l'image de couverture et la video
-    useEffect(() => {
-        axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
-            axios.spread(({data: thumbnail}, {data: videos}) => {
-                setThumb(BASE_URL + thumbnail.contentUrl);
-                setVideo(BASE_URL + videos.contentUrl);
-            })
-        );
-    });
     
     /* ---------------------------------------------------- */
 
@@ -97,7 +77,7 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
                             <div className='wrapperVideoThumbnail' style={{background: `linear-gradient(rgba(20, 20, 20, 0) 0%, rgb(20, 20, 20) 100%), url('`+ Unavailable +`')`, opacity: 1}}>
                             </div>
                             :
-                            <div className='wrapperVideoThumbnail' style={{background: `linear-gradient(rgba(20, 20, 20, 0) 0%, rgb(20, 20, 20) 100%), url(${thumb})`, opacity: showThumb}}>
+                            <div className='wrapperVideoThumbnail' style={{background: `linear-gradient(rgba(20, 20, 20, 0) 0%, rgb(20, 20, 20) 100%), url(${element.thumbnail.contentUrl})`, opacity: showThumb}}>
                             </div>
                     }
                     
@@ -108,7 +88,7 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
                             <video src=""></video>
                             </>
                             :
-                            <video ref={vidRef} autoPlay muted={muted} src={video} poster={thumb} onEnded={showThumbnail}>
+                            <video ref={vidRef} autoPlay muted={muted} src={element.video.contentUrl} poster={element.thumbnail.contentUrl} onEnded={showThumbnail}>
                             </video>
                     }
                     <button type="button" className="close" onClick={closeModal}>

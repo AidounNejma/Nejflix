@@ -21,10 +21,6 @@ const ModalMainHeader = ({openedModalHeader, setIsOpendModalHeader, element, set
     const [showThumb, setShowThumb] = useState(0); //Image poster
     const vidRef = useRef(null); //Vidéo
 
-    //Constantes pour les url des vignettes et des vidéos
-    const [thumb, setThumb] = useState('');
-    const [video, setVideo] = useState('');
-
     /* ---------------------------------------------------- */
 
     //Gestion du volume
@@ -37,23 +33,7 @@ const ModalMainHeader = ({openedModalHeader, setIsOpendModalHeader, element, set
             setIconMuted(volume0);
         }
     }
-    /* ---------------------------------------------------- */
 
-    //Liens vers l'Api pour les vignettes et les videos concernant l'élément cliqué
-    let endpoints = [
-        BASE_URL + element.thumbnail,
-        BASE_URL + element.video,
-    ];
-    
-    //Requête pour récupérer l'image de couverture et la video
-    useEffect(() => {
-        axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
-            axios.spread(({data: thumbnail}, {data: videos}) => {
-                setThumb(BASE_URL + thumbnail.contentUrl);
-                setVideo(BASE_URL + videos.contentUrl);
-            })
-        );
-    });
     /* ---------------------------------------------------- */
 
     //Lorsque la vidéo est terminée (onEnded)
@@ -73,7 +53,7 @@ const ModalMainHeader = ({openedModalHeader, setIsOpendModalHeader, element, set
 
     //Ouvrir le lecteur video
     const handleVideoPlayer = () => {
-        setGetVideo(video);
+        setGetVideo(BASE_URL + element.video.contentUrl);
         setShowVideo(true);
     }
 
@@ -95,7 +75,7 @@ const ModalMainHeader = ({openedModalHeader, setIsOpendModalHeader, element, set
                             <div className='wrapperVideoThumbnail' style={{background: `linear-gradient(rgba(20, 20, 20, 0) 0%, rgb(20, 20, 20) 100%), url('`+ Unavailable +`')`, opacity: 1}}>
                             </div>
                             :
-                            <div className='wrapperVideoThumbnail' style={{background: `linear-gradient(rgba(20, 20, 20, 0) 0%, rgb(20, 20, 20) 100%), url(${thumb})`, opacity: showThumb}}>
+                            <div className='wrapperVideoThumbnail' style={{background: `linear-gradient(rgba(20, 20, 20, 0) 0%, rgb(20, 20, 20) 100%), url(${BASE_URL + element.thumbnail.contentUrl})`, opacity: showThumb}}>
                             </div>
                     }
                     
@@ -103,7 +83,7 @@ const ModalMainHeader = ({openedModalHeader, setIsOpendModalHeader, element, set
                             element.video == null ?          
                             <video src=""></video>
                             :
-                            <video ref={vidRef} autoPlay muted={muted} src={video} poster={thumb} onEnded={showThumbnail}>
+                            <video ref={vidRef} autoPlay muted={muted} src={BASE_URL + element.video.contentUrl} poster={BASE_URL + element.thumbnail.contentUrl} onEnded={showThumbnail}>
                             </video>
                     }
                     <button type="button" className="close" onClick={closeModal}>

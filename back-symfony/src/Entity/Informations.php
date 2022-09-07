@@ -2,53 +2,71 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\InformationsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\InformationsRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: InformationsRepository::class)]
-#[ApiResource]
+
+#[ApiResource(
+    normalizationContext: ['groups' => ['informations:read']]
+)]
+
 class Informations
 {
+    #[Groups("informations:read")]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups("informations:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
+    #[Groups("informations:read")]
     #[ORM\Column(nullable: true)]
     private ?int $age = null;
 
+    #[Groups("informations:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $nationality = null;
 
+    #[Groups("informations:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $drivingLicence = null;
 
+    #[Groups("informations:read")]
     #[ORM\Column(nullable: true)]
     private ?int $number = null;
 
+    #[Groups("informations:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $address = null;
 
+    #[Groups("informations:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $city = null;
 
+    #[Groups("informations:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $country = null;
 
+    #[Groups("informations:read")]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $biography = null;
 
+    #[Groups("informations:read")]
     #[ORM\ManyToOne(inversedBy: 'informationsVideo')]
     private ?MediaObject $video = null;
 
+    #[Groups("informations:read")]
     #[ORM\ManyToOne(inversedBy: 'informationsThumbnail')]
     private ?MediaObject $thumbnail = null;
 
+    #[Groups("informations:read")]
     #[ORM\Column(nullable: true)]
     private ?int $zipCode = null;
 

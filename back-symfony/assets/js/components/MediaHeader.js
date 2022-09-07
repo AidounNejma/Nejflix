@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import axios from 'axios';
+import React, { useRef, useState } from 'react';
 import { BASE_URL } from '../config';
 
 const MediaHeader = ({element, setElements, openModalHeader, setShowVideo, setGetVideo}) => {
@@ -18,10 +17,6 @@ const MediaHeader = ({element, setElements, openModalHeader, setShowVideo, setGe
     const [showSubtitle, setShowSubtitle] = useState('none'); //Résumé
     const [titleClass, setTitleClass] = useState('miniTitle'); //Titre du header
     const vidRef = useRef(null); //Vidéo
-
-    //Constantes pour stocker les url de la vignette et de la vidéo
-    const [thumb, setThumb] = useState(''); //Image poster
-    const [video, setVideo] = useState(''); //Vidéo
 
     /* ---------------------------------------------------- */
 
@@ -74,26 +69,9 @@ const MediaHeader = ({element, setElements, openModalHeader, setShowVideo, setGe
     }
 
     /* ---------------------------------------------------- */
-    //Liens vers l'Api pour les vignettes et les videos concernant l'élément cliqué
-    let endpoints = [
-        BASE_URL + element.thumbnail,
-        BASE_URL + element.video,
-    ];
-
-    //Requête pour récupérer l'image de couverture et la video
-    useEffect(() => {
-        axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
-            axios.spread(({data: thumbnail}, {data: videos}) => {
-                setThumb(BASE_URL + thumbnail.contentUrl);
-                setVideo(BASE_URL + videos.contentUrl);
-            })
-        );
-    });
-
-    /* ---------------------------------------------------- */
     
     const handleVideoPlayer = () => {
-        setGetVideo(video);
+        setGetVideo(BASE_URL + element.video.contentUrl);
         setShowVideo(true);
     }
     
@@ -104,8 +82,8 @@ const MediaHeader = ({element, setElements, openModalHeader, setShowVideo, setGe
                     <div className='billboard-motion dismiss-mask'>
                         <div className='motion-background-component bottom-layer full-screen'>
                         <div className='hero-image-wrapper'>
-                        <div className='hero static-image image-layer'style={{background: `linear-gradient(180deg, rgba(20,20,20,0) 0%, rgba(20,20,20,1) 90%, rgba(20,20,20,1) 100%), url(${thumb})`, opacity: showThumb}}></div>
-                        <video onPlay={hideSubtitle} autoPlay ref={vidRef} muted={muted} src={video} poster={thumb} onEnded={showThumbnail}></video>
+                        <div className='hero static-image image-layer'style={{background: `linear-gradient(180deg, rgba(20,20,20,0) 0%, rgba(20,20,20,1) 90%, rgba(20,20,20,1) 100%), url(${BASE_URL + element.thumbnail.contentUrl})`, opacity: showThumb}}></div>
+                        <video onPlay={hideSubtitle} autoPlay ref={vidRef} muted={muted} src={BASE_URL + element.video.contentUrl} poster={BASE_URL + element.thumbnail.contentUrl} onEnded={showThumbnail}></video>
                     </div>
                         </div>
                     </div>

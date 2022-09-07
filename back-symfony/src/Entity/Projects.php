@@ -8,50 +8,67 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProjectsRepository;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProjectsRepository::class)]
-#[ApiResource]
+
+#[ApiResource(
+    normalizationContext: ['groups' => ['project:read']]
+)]
+
 class Projects
 {
+    #[Groups("project:read")]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups("project:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
+    #[Groups("project:read")]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[Groups("project:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $company = null;
 
+    #[Groups("project:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $language = null;
 
+    #[Groups("project:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $framework = null;
 
+    #[Groups("project:read")]
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateOfCreation = null;
 
-    #[ORM\ManyToOne(inversedBy: MediaObject::class)]
+    #[Groups("project:read")]
+    #[ORM\ManyToOne(inversedBy: 'thumbnailProjects')]
     #[ORM\JoinColumn(nullable: true)]
     #[ApiProperty(iri: 'https://schema.org/MediaObject')]
     private ?MediaObject $thumbnail = null;
 
+    #[Groups("project:read")]
     #[ORM\ManyToOne(inversedBy: 'projectsVideo')]
     #[ORM\JoinColumn(nullable: true)]
     #[ApiProperty(iri: 'https://schema.org/MediaObject')]
     private ?MediaObject $video = null;
 
+    #[Groups("project:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $percentage = null;
 
+    #[Groups("project:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $duration = null;
 
+    #[Groups("project:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $github = null;
 

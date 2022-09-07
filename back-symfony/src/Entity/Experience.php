@@ -2,47 +2,63 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\ExperienceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ExperienceRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ExperienceRepository::class)]
-#[ApiResource]
+
+#[ApiResource(
+    normalizationContext: ['groups' => ['experience:read']]
+)]
+
 class Experience
 {
+    #[Groups("experience:read")]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups("experience:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
+    #[Groups("experience:read")]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[Groups("experience:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $company = null;
 
+    #[Groups("experience:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $language = null;
 
+    #[Groups("experience:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $framework = null;
 
+    #[Groups("experience:read")]
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateOfCreation = null;
 
-    #[ORM\ManyToOne(inversedBy: 'experiences')]
+    #[Groups("experience:read")]
+    #[ORM\ManyToOne(inversedBy: 'thumbnailExperiences')]
     private ?MediaObject $thumbnail = null;
 
+    #[Groups("experience:read")]
     #[ORM\ManyToOne(inversedBy: 'experiencesVideo')]
     private ?MediaObject $video = null;
 
+    #[Groups("experience:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $percentage = null;
 
+    #[Groups("experience:read")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $duration = null;
 
