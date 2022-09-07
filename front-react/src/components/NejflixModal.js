@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import '../assets/styles/components/_nejflixmodal.scss'
 import { BASE_URL } from '../config';
+import Unavailable from '../assets/img/content-unavailable.jpeg';
 
 
 const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo}) => {
@@ -91,10 +92,23 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
 
             <div className={`modal ${opened ? 'in' : 'out'}`} >
                 <div className="modal-header">
-                    <div className='wrapperVideoThumbnail' style={{background: `linear-gradient(rgba(20, 20, 20, 0) 0%, rgb(20, 20, 20) 100%), url(${thumb})`, opacity: showThumb}}>
-                    </div>
-                    <video ref={vidRef} autoPlay muted={muted} src={video} poster={thumb} onEnded={showThumbnail}>
-                    </video>
+                    {
+                            element.thumbnail === null ?
+                            <div className='wrapperVideoThumbnail' style={{background: `linear-gradient(rgba(20, 20, 20, 0) 0%, rgb(20, 20, 20) 100%), url('`+ Unavailable +`')`, opacity: 1}}>
+                            </div>
+                            :
+                            <div className='wrapperVideoThumbnail' style={{background: `linear-gradient(rgba(20, 20, 20, 0) 0%, rgb(20, 20, 20) 100%), url(${thumb})`, opacity: showThumb}}>
+                            </div>
+                    }
+                    
+                    {
+                            element.video === null ?
+                            <>
+                            </>
+                            :
+                            <video ref={vidRef} autoPlay muted={muted} src={video} poster={thumb} onEnded={showThumbnail}>
+                            </video>
+                    }
                     <button type="button" className="close" onClick={closeModal}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="button" aria-label="close" tabIndex="0">
                             <path fillRule="evenodd" clipRule="evenodd" d="M2.29297 3.70706L10.5859 12L2.29297 20.2928L3.70718 21.7071L12.0001 13.4142L20.293 21.7071L21.7072 20.2928L13.4143 12L21.7072 3.70706L20.293 2.29285L12.0001 10.5857L3.70718 2.29285L2.29297 3.70706Z" fill="currentColor"></path>

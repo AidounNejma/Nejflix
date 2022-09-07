@@ -41,8 +41,8 @@ const Project = () => {
         company: "",
         framework: "",
         dateOfCreation:"",
-        thumbnail: "",
-        video: "",
+        thumbnail: null,
+        video: null,
         percentage: "",
         duration: "",
         github: ""

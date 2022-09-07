@@ -36,7 +36,7 @@ const Information = () => {
         zipCode: "",
         country: "",
         biography: "",
-        video: ""
+        video: null
     });
 
     //Contantes pour les erreurs (initialisées vides)

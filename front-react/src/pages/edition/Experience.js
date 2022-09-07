@@ -41,8 +41,8 @@ const Experience = () => {
         company: "",
         framework: "",
         dateOfCreation:"",
-        thumbnail: "",
-        video: "",
+        thumbnail: null,
+        video: null,
         percentage: "",
         duration: ""
     });

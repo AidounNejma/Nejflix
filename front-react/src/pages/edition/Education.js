@@ -41,10 +41,10 @@ const Education = () => {
         company: "",
         framework: "",
         dateOfCreation:"",
-        thumbnail: "",
-        video: "",
         percentage: "",
-        duration: ""
+        duration: "",
+        thumbnail: null,
+        video: null
     });
 
     //Contantes pour les erreurs (initialisées vides)
@@ -55,10 +55,10 @@ const Education = () => {
         company: "",
         framework: "",
         dateOfCreation:"",
-        thumbnail: "",
-        video: "",
         percentage: "",
-        duration: ""
+        duration: "",
+        thumbnail: "",
+        video: ""
     });
 
     //Constante pour l'édition
@@ -155,8 +155,12 @@ const Education = () => {
         });
     }
 
+    
+
     // Gestion de la soumission du formulaire
     const handleSubmit = async event => {
+
+        console.log(education);
         event.preventDefault();
 
         try {

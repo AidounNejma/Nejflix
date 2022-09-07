@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {BASE_URL} from '../config';
+import Unavailable from '../assets/img/content-unavailable.jpeg';
 
 const Slide = ({element}) => {
     const [thumb, setThumb] = useState([]);
@@ -17,9 +18,17 @@ const Slide = ({element}) => {
 
     return (
         <button>
-            <div style={{background: 'url('+ BASE_URL + thumb.path +')'}} className='thumbnailSwiper'>
-                <h1 className="heading">{element.name}</h1>
-            </div>
+            {
+                element.thumbnail == null ?
+                <div style={{background: 'url('+ Unavailable +')'}} className='thumbnailSwiper'>
+                    <h1 className="heading">{element.name}</h1>
+                </div>
+                :
+                <div style={{background: 'url('+ BASE_URL + thumb.path +')'}} className='thumbnailSwiper'>
+                    <h1 className="heading">{element.name}</h1>
+                </div>
+            }
+            
         </button>
     );
 };
