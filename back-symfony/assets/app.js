@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './index';
-import "./css/styles/index.scss";
+import "./css/app.scss";
 import "./js/interceptors/axios";
 // start the Stimulus application
 /* import './js/bootstrap'; */
