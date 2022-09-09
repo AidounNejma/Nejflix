@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react';
 import {useNavigate} from 'react-router-dom';
 import AuthApi from "../services/AuthApi";
 import AuthContext from '../contexts/AuthContext';
+import { toast } from "react-toastify";
 
 import Footer from '../components/Footer';
 import '../../css/pages/_login.scss';
@@ -38,12 +39,29 @@ const LogIn = () => {
         try {
             await AuthApi.authenticate(credentials);
             setError("");
+            toast.success('🥳 Connexion réussie !', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             setIsAuthenticated(true);
             navigate(to, { replace: true });
 
         } catch (error) {
-            console.log(error);
             setError("Les informations de connexions ne sont pas valides");
+            toast.error('😩 Les informations de connexions ne sont pas valides.', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
         
     }
