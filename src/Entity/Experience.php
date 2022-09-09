@@ -48,7 +48,7 @@ class Experience
     private ?\DateTimeInterface $dateOfCreation = null;
 
     #[Groups("experience:read")]
-    #[ORM\ManyToOne(inversedBy: 'thumbnailExperiences')]
+    #[ORM\ManyToOne(inversedBy: 'thumbnailExperience')]
     #[ORM\JoinColumn(nullable: true)]
     #[ApiProperty(iri: 'https://schema.org/MediaObject')]
     private ?MediaObject $thumbnail = null;

@@ -72,7 +72,7 @@ class MediaObject
     private Collection $thumbnailProjects;
 
     #[ORM\OneToMany(mappedBy: 'thumbnail', targetEntity: Experience::class)]
-    private Collection $thumbnailExperiences;
+    private Collection $thumbnailExperience;
 
     #[ORM\OneToMany(mappedBy: 'thumbnail', targetEntity: Education::class)]
     private Collection $thumbnailEducation;
@@ -95,7 +95,7 @@ class MediaObject
     public function __construct()
     {
         $this->thumbnailProjects = new ArrayCollection();
-        $this->thumbnailExperiences = new ArrayCollection();
+        $this->thumbnailExperience = new ArrayCollection();
         $this->thumbnailEducation = new ArrayCollection();
         $this->projectsVideo = new ArrayCollection();
         $this->educationVideo = new ArrayCollection();
@@ -141,26 +141,26 @@ class MediaObject
     }
 
     /**
-     * @return Collection<int, thumbnailExperiences>
+     * @return Collection<int, thumbnailExperience>
      */
-    public function getExperiences(): Collection
+    public function getThumbnailExperience(): Collection
     {
-        return $this->thumbnailExperiences;
+        return $this->thumbnailExperience;
     }
 
-    public function addExperience(Experience $thumbnailExperience): self
+    public function addThumbnailExperience(Experience $thumbnailExperience): self
     {
-        if (!$this->thumbnailExperiences->contains($thumbnailExperience)) {
-            $this->thumbnailExperiences->add($thumbnailExperience);
+        if (!$this->thumbnailExperience->contains($thumbnailExperience)) {
+            $this->thumbnailExperience->add($thumbnailExperience);
             $thumbnailExperience->setThumbnail($this);
         }
 
         return $this;
     }
 
-    public function removeExperience(Experience $thumbnailExperience): self
+    public function removeThumbnailExperience(Experience $thumbnailExperience): self
     {
-        if ($this->thumbnailExperiences->removeElement($thumbnailExperience)) {
+        if ($this->thumbnailExperience->removeElement($thumbnailExperience)) {
             // set the owning side to null (unless already changed)
             if ($thumbnailExperience->getThumbnail() === $this) {
                 $thumbnailExperience->setThumbnail(null);
