@@ -31,6 +31,7 @@
             margin-right: 5px;
             text-decoration: none;
             vertical-align: middle;
+            margin-top: 2%;
         }
 
         .tabbed-primary-navigation{
@@ -47,7 +48,7 @@
                 display: none;
                 cursor: pointer;
                 &:hover .sub-menu.theme-lakira{
-                    opacity: 1;
+                    display: block;
                 }
             }
 
@@ -144,9 +145,9 @@
                 cursor: default;
                 font-size: 13px;
                 line-height: 21px;
-                opacity: 0;
+                display: none;
                 position: absolute;
-                top: 71px;
+                top: 48px;
                 transition: 150ms;
             }
 
@@ -353,6 +354,21 @@
                         display: block;
                     }
                 } 
+            }
+        }   
+    }  
+}
+
+@media screen and (max-width: 335px) {
+    .pinning-header{
+        .main-header{
+            
+            .secondary-navigation{
+                .nav-element{
+                    .notifications{
+                        display: none;
+                    }
+                }
             }
         }   
     }  

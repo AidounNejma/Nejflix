@@ -131,7 +131,7 @@
 
                             .supplemental-message {
                                 color: #fff;
-                                font-size: 1.6vw;
+                                font-size: 1rem;
                                 margin: 1vw 0;
                                 text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
                                 transition: color 1s cubic-bezier(.165,.84,.44,1);
@@ -372,6 +372,26 @@
                             .billboard-title{
                                 .title-logo {
                                     font-size: 1.5rem;
+                                }
+                            }
+                        }
+                    }   
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .lolomo {
+        .billboard-row {
+            .billboard {
+                .info{
+                    .logo-and-text{
+                        .titleWrapper{
+                            .billboard-title{
+                                .title-logo {
+                                    font-size: 1rem;
                                 }
                             }
                         }
