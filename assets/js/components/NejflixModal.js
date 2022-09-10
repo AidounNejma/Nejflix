@@ -47,13 +47,15 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
         vidRef.current.play();
         setShowThumb(0);
         setShowRewind('none');
-        setShowMute('flex')
+        setShowMute('flex');
     }
 
     //Ouvrir le lecteur video
     const handleVideoPlayer = () => {
         setGetVideo(element.video.contentUrl);
         setShowVideo(true);
+        setMuted(true);
+        setIconMuted(volume0);  
     }
 
     //Fermer la modale
@@ -159,7 +161,7 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
                             </div>
                         </div>
 
-                        <p>{element.description}</p>
+                        <pre>{element.description}</pre>
                     </div>
 
                     <div className="modal-content-second">
@@ -184,7 +186,7 @@ const NejflixModal = ({opened, setIsOpened, element, setGetVideo, setShowVideo})
                             <>
                                 <div className="show">
                                     <span className="title">Github: </span>
-                                    <span className="sub-title"><a href={element.github}>c'est par ici</a></span>
+                                    <span className="sub-title"><a href={element.github} target='_blank'>c'est par ici</a></span>
                                 </div>
                             </>
                             :

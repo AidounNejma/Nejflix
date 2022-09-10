@@ -287,7 +287,7 @@ $white: #ffffff;
                 p {
                     font-size: 1.4rem;
                     line-height: 24px;
-                    word-break: break-word;
+                    white-space: pre-line;
                     font-size: 62.5%;
                 }
             }
@@ -436,4 +436,45 @@ $white: #ffffff;
     }
 }
 
-@media screen and (max-width: 375px) {}
+@media screen and (max-width: 500px) {
+    .wrapperModalMainHeader {
+        .modal{
+            .modal-header{
+                .header-content{
+                    .header-title{
+                        .header-buttons{
+                            .play{
+                                font-size: 70%;
+                                svg{
+                                    height: 0.8rem;
+                                    width: 0.8rem;
+                                }
+                            }
+
+                            .volume, .rate, .add{
+                                padding: 0.2rem;
+                                
+                                svg{
+                                    width: 0.8rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .modal-body{
+                padding: 15px 25px;
+                .modal-content-second {
+                    .cast, .genres, .show {
+                        font-size: 0.7rem !important;
+
+                        span{
+                            font-size: 0.7rem !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

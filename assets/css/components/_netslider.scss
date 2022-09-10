@@ -44,6 +44,7 @@ $duration: 250ms;
                 width: 100%;
                 margin: 0;
                 padding: 0;
+                display: none;
             }
 
             .duration {
@@ -107,16 +108,53 @@ $duration: 250ms;
 .wrapper-first{
     margin-top: -6%;
 }
+
+@media screen and (min-width: 300px) {
+    .swiper-container {
+        width: 300px;
+    }
+
+    .netslider-wrapper {
+        .section {
+            .item {
+                button {
+                    .thumbnailSwiper{
+                        height: 150px;
+                    }
+                }
+            }
+        }
+    }  
+}
+
 @media screen and (min-width: 400px) {
     .swiper-container {
         width: 400px;
     }
+    
 }
 
 @media screen and (min-width: 500px) {
     .swiper-container {
         width: 500px;
     }
+
+    .netslider-wrapper {
+        .section {
+            .item {
+                &:hover {
+                    margin: 0 40px;
+                    transform: scale(1.2);
+                }
+
+                button {
+                    .thumbnailSwiper{
+                        height: 200px;
+                    }
+                }
+            }
+        }
+    }  
 }
 
 @media screen and (min-width: 768px) {
@@ -128,5 +166,24 @@ $duration: 250ms;
 @media screen and (min-width: 895px) {
     .swiper-container {
         width: 895px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    
+    .netslider-wrapper{
+        .section{
+            .swiper-button-prev, .swiper-button-next{
+                width: 30px;
+            }
+        }
+    }
+
+    .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after{
+        font-size: 1rem;
+    }
+
+    .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after{
+        font-size: 1rem;
     }
 }

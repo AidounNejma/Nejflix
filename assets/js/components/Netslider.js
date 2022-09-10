@@ -26,21 +26,30 @@ const Netslider = ({elements, setElements, openModal, title}) => {
                 navigation
                 className='section'
                 breakpoints={{
-                    // when window width is >= 640px
-                    414: {
-                        width: 414,
+                    // when window width is >= 200px
+                    200: {
                         slidesPerView: 1,
                         spaceBetween:0
                     },
-                    // when window width is >= 768px
+                    // when window width is >= 568px
                     600: {
-                        width: 600,
                         slidesPerView: 2,
                         spaceBetween:10
                     },
                     895: {
-                        width: 895,
                         slidesPerView: 3,
+                        spaceBetween:10
+                    },
+                    1000: {
+                        slidesPerView: 4,
+                        spaceBetween:10
+                    },
+                    1400: {
+                        slidesPerView: 5,
+                        spaceBetween:10
+                    },
+                    1600: {
+                        slidesPerView: 6,
                         spaceBetween:20
                     },
                 }}

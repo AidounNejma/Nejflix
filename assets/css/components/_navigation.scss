@@ -31,7 +31,6 @@
             margin-right: 5px;
             text-decoration: none;
             vertical-align: middle;
-            margin-top: 2%;
         }
 
         .tabbed-primary-navigation{
@@ -359,16 +358,20 @@
     }  
 }
 
-@media screen and (max-width: 335px) {
+@media screen and (max-width: 414px) {
     .pinning-header{
         .main-header{
             
             .secondary-navigation{
                 .nav-element{
-                    .notifications{
+                    .searchBox, .notifications{
                         display: none;
                     }
                 }
+            }
+
+            .logo{
+                margin-top: 2%;
             }
         }   
     }  

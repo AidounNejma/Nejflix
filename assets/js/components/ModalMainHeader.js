@@ -156,7 +156,7 @@ const ModalMainHeader = ({openedModalHeader, setIsOpendModalHeader, element, set
                             </div>
                         </div>
 
-                        <p>{element.biography}</p>
+                        <pre>{element.biography}</pre>
                     </div>
 
                     <div className="modal-content-second">
